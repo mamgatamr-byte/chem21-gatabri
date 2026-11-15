@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C21A3 · التوزيع الإلكتروني · منصة قطابري لإتقان كيمياء 2-1</title>
+<style>
+:root{--primary:#0e7c3a;--primary-dark:#0a5f2c;--positive:#198038;--error:#da1e28;--warning:#b28600;--bg:#fff;--surface:#f4f4f4;--surface-high:#e0e0e0;--text:#161616;--text-sec:#525252;--border:#e0e0e0;--radius:4px}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:'IBM Plex Sans Arabic','Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+body{display:flex;flex-direction:column;min-height:100vh}
+header{background:var(--surface);padding:1rem 2rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.brand h1{margin:0;font-size:1.05rem;font-weight:700;color:var(--primary)}
+.brand .sub{font-size:.82rem;color:var(--text-sec);margin-top:2px}
+.header-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+main{flex:1;max-width:820px;margin:0 auto;padding:2rem 1rem;width:100%}
+footer{text-align:center;padding:1rem;color:var(--text-sec);font-size:.82rem;border-top:1px solid var(--border)}
+button,a.btn{font-family:inherit;font-size:1rem;padding:.6rem 1.2rem;border-radius:var(--radius);border:1px solid transparent;cursor:pointer;background:var(--surface);color:var(--text);transition:.15s;text-decoration:none;display:inline-block;text-align:center}
+button:hover,a.btn:hover{background:var(--surface-high)}
+button.primary,a.btn.primary{background:var(--primary);color:#fff}
+button.primary:hover,a.btn.primary:hover{background:var(--primary-dark)}
+button.primary:disabled{background:var(--surface-high);color:var(--text-sec);cursor:not-allowed}
+button.outline{background:#fff;border:1px solid var(--border);color:var(--text)}
+button.outline:hover{background:var(--surface)}
+.fab-home{position:fixed;bottom:1.5rem;left:1.5rem;width:54px;height:54px;border-radius:50%;background:var(--primary);color:#fff;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(14,124,58,0.45);font-size:1.5rem;display:flex;align-items:center;justify-content:center;z-index:50;padding:0;transition:transform .15s,background .15s;text-decoration:none}
+.fab-home:hover{background:var(--primary-dark);transform:scale(1.08);text-decoration:none;color:#fff}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1rem}
+.breadcrumb{font-size:.85rem;color:var(--text-sec);margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center}
+.breadcrumb a{color:var(--primary);text-decoration:none}
+.breadcrumb a:hover{text-decoration:underline}
+.group-title{margin:1.5rem 0 .7rem;font-size:1rem;font-weight:700;color:var(--primary);border-bottom:2px solid var(--primary);padding-bottom:.3rem}
+.objective-row{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.2rem;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:.5rem;cursor:pointer;transition:.15s;background:#fff;width:100%;font-family:inherit;font-size:inherit;text-align:right;color:var(--text)}
+.objective-row > *:not(:first-child){margin-right:1rem}
+.objective-row:hover{border-color:var(--primary)}
+.objective-row.locked{opacity:.5;cursor:not-allowed;background:var(--surface)}
+.objective-row.mastered{border-color:var(--positive);background:#edf7f0}
+.obj-text{flex:1;font-size:.95rem}
+.obj-id{font-family:monospace;font-size:.8rem;color:var(--text-sec);margin-left:.5rem}
+.state-badge{display:inline-block;padding:.2rem .6rem;border-radius:999px;font-size:.72rem;font-weight:600;white-space:nowrap}
+.state-AVAILABLE{background:#edf7f0;color:var(--primary)}
+.state-LOCKED{background:var(--surface-high);color:var(--text-sec)}
+.state-MASTERED{background:#edf7f0;color:var(--positive)}
+.state-DIAGNOSTIC,.state-INSTRUCTION,.state-CHECK,.state-REMEDIATION,.state-RECHECK{background:#fff3e0;color:var(--warning)}
+.question{font-size:1.08rem;font-weight:500;margin-bottom:1rem;line-height:1.5}
+.options{display:flex;flex-direction:column}
+.options > * + *{margin-top:.5rem}
+.option{padding:.85rem 1.1rem;border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:.15s;font-size:.95rem;background:#fff;color:var(--text);font-family:inherit;text-align:right;width:100%;display:block}
+.option:hover:not(:disabled){border-color:var(--primary);background:#f5fbf7}
+.option.correct{border-color:var(--positive);background:#edf7f0}
+.option.wrong{border-color:var(--error);background:#fef2f2}
+.option:disabled{cursor:default;opacity:1}
+.feedback{margin-top:1rem;padding:1rem;border-radius:var(--radius);font-size:.92rem}
+.feedback.correct{background:#edf7f0;border-right:4px solid var(--positive)}
+.feedback.wrong{background:#fef2f2;border-right:4px solid var(--error)}
+.feedback.neutral{background:#edf7f0;border-right:4px solid var(--primary)}
+.next-btn-wrap{margin-top:1rem;display:flex;justify-content:flex-start}
+.next-btn-wrap button{min-width:140px}
+.progress-bar{height:8px;background:var(--surface);border-radius:4px;overflow:hidden;margin:.5rem 0}
+.progress-bar>div{height:100%;background:var(--primary);transition:width .3s}
+.textarea{width:100%;min-height:110px;padding:1rem;border:1px solid var(--border);border-radius:var(--radius);font-family:inherit;font-size:1rem;resize:vertical}
+.prose h3{margin-top:1.5rem;margin-bottom:.5rem;color:var(--primary);font-size:1.05rem}
+.prose ul,.prose ol{padding-right:1.5rem}
+.prose table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+.prose th,.prose td{padding:.5rem;border:1px solid var(--border);text-align:right}
+.prose th{background:var(--surface)}
+.certificate{background:#fff;border:8px double var(--primary);padding:3rem 2rem;text-align:center;margin:2rem 0}
+.certificate h2{color:var(--primary);font-size:1.7rem;margin-top:0}
+.certificate .name{font-size:2rem;font-weight:700;margin:1.5rem 0}
+.certificate .course{font-size:1.1rem;color:var(--text-sec)}
+.certificate .code{font-family:monospace;font-size:.85rem;color:var(--text-sec);margin-top:2rem}
+.certificate .sig{margin-top:3rem;font-weight:600;font-size:1rem}
+.muted{color:var(--text-sec);font-size:.88rem}
+.row{display:flex;flex-wrap:wrap;margin:1rem -.25rem 0}
+.row > *{margin:0 .25rem .5rem}
+.hidden{display:none}
+.skip-btn{background:#fff;color:var(--text-sec);border-style:dashed;margin-top:.5rem}
+.skip-btn:hover{background:var(--surface)}
+.storage-warn{background:#fff3e0;border:1px solid var(--warning);color:#7a4f00;padding:.7rem 1rem;border-radius:var(--radius);font-size:.85rem;margin-bottom:1rem}
+.ltr,.bdi{direction:ltr;unicode-bidi:isolate;display:inline-block}
+bdi{unicode-bidi:isolate}
+@media print{body *{visibility:hidden}.certificate,.certificate *{visibility:visible}.certificate{position:absolute;top:0;right:0;left:0;border:4px solid #000}.no-print{display:none!important}.fab-home{display:none!important}@page{margin:1.5cm}}
+@media(max-width:600px){header,main{padding:1rem}.certificate{padding:1.5rem 1rem}.certificate .name{font-size:1.4rem}.fab-home{bottom:1rem;left:1rem;width:48px;height:48px;font-size:1.3rem}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <h1>منصة قطابري لإتقان كيمياء 2-1</h1>
+    <div class="sub">C21A3 · التوزيع الإلكتروني · المعلم محمد قطابري راجحي</div>
+  </div>
+  <div class="header-actions">
+    <a href="index.html" class="btn outline">🏠 الرئيسية</a>
+  </div>
+</header>
+<main id="view"></main>
+<footer>مجمع العز التعليمي · تعلّم حتى الإتقان — مجانًا للجميع</footer>
+<a href="index.html" class="fab-home" aria-label="الصفحة الرئيسية" title="الصفحة الرئيسية">🏠</a>
+
+<script nomodule>
+document.getElementById('view').innerHTML = '<div class="card"><h2>متصفحك قديم</h2><p>تحتاج Chrome 61+ أو Firefox 60+ أو Safari 11+ أو Edge 16+.</p></div>';
+</script>
+<script type="module">
+const LESSON_CODE = 'C21A3';
+const LESSON_ID = '1-3';
+const CHAPTER_ID = 'A';
+const LESSON_TITLE = 'التوزيع الإلكتروني';
+const THRESHOLD = 0.67;
+const EXTERNAL_PREREQS = ['PRE-C21A1', 'PRE-C21A2'];
+
+const REFLECTION_KEYWORDS = {
+  '1-3-1': ['أوفباو', 'تصاعدي', 'الأقل', 'طاقة'],
+  '1-3-2': ['باولي', 'استبعاد', 'إلكترونان', 'دوران'],
+  '1-3-3': ['هوند', 'فرادى', 'ازدواج', 'متساوية'],
+  '1-3-4': ['توزيع', 'إلكتروني', '1s', 'أوفباو'],
+  '1-3-5': ['مربع', 'سهم', 'غاز', 'نبيل', 'ترميز'],
+  '1-3-6': ['تكافؤ', 'لويس', 'نقطة', 'مجموعة']
+};
+
+/**
+ * ============================================================
+ * تنبيه توثيقي — تعهد 1 (النقل الحرفي)
+ * ============================================================
+ * مصدر الأهداف: ملف "مصفوفة تحليل منهج الكيمياء (2-1) التفاعلية"
+ *   → CURRICULUM_DATA[0].lessons[2].outcomes
+ *
+ * النص الحرفي في المصفوفة هو جملة واحدة مركّبة تُفصل بفاصلة منقوطة:
+ *   1) "يطبق مبادئ أوفباو وباولي وهوند لكتابة التوزيع الإلكتروني"
+ *   2) "يعبر عن التوزيع الإلكتروني برسم مربعات المجالات وترميز الغاز النبيل"
+ *   3) "يحدد إلكترونات التكافؤ"
+ *
+ * الأهداف الستة أدناه هي تفكيك اجتهادي لهذه الجمل الثلاث،
+ * بصيغة "أن يـ..." لتسهيل القياس والتقويم. تم بإذن المستخدم
+ * الصريح (الخيار ب — 2026-11-15).
+ *
+ * ملاحظات على التفكيك:
+ *   - الأهداف 1-3 مشتقة من حقل `concepts` (المبادئ الثلاثة كأساس معرفي).
+ *   - الهدف 4 من الجملة 1 (تطبيق المبادئ).
+ *   - الهدف 5 من الجملة 2 (المربعات وترميز الغاز النبيل).
+ *   - الهدف 6 من الجملة 3 + حقل concepts (التمثيل النقطي/لويس).
+ *
+ * TODO: عند توفر content/chapters/chapter-01.json (أو chapter-0A.json)،
+ *       يُعاد النقل الحرفي للأهداف من الملف المصدر، وتُلغى هذه الملاحظة.
+ * ============================================================
+ */
+const OBJECTIVES = [
+  {
+    id: '1-3-1', order: 1,
+    text: 'أن يعرف الطالب مبدأ أوفباو (البناء التصاعدي).',
+    bloom: 'تذكر', prereqs: ['PRE-C21A2'],
+    instruction: {
+      explanation: `<b>مبدأ أوفباو (Aufbau Principle):</b> تُملأ المجالات الإلكترونية بالترتيب من الأقل طاقة إلى الأعلى.<br><br><b>ترتيب الملء:</b><br><span class="ltr">1s → 2s → 2p → 3s → 3p → 4s → 3d → 4p → 5s → ...</span><br><br><b>ملاحظة مهمة:</b> المجال <span class="ltr">4s</span> يُملأ قبل <span class="ltr">3d</span> لأن طاقته أقل، رغم أن رقمه الرئيسي أكبر.`,
+      prompt: 'ما قاعدة مبدأ أوفباو في ملء المجالات الإلكترونية؟'
+    },
+    remediation: {
+      analogy: 'مثل ملء كوب من الأسفل إلى الأعلى: الماء (الإلكترونات) يبدأ من الأسفل (أقل طاقة) ويصعد. لا يمكن أن يبدأ من الأعلى ويترك الأسفل فارغاً.',
+      explanation: 'مبدأ أوفباو يعني "البناء التصاعدي": ابدأ من المستوى الأقل طاقة ثم انتقل للأعلى. الترتيب: <span class="ltr">1s → 2s → 2p → 3s → 3p → 4s → 3d</span>.'
+    }
+  },
+  {
+    id: '1-3-2', order: 2,
+    text: 'أن يعرف الطالب مبدأ باولي للاستبعاد.',
+    bloom: 'تذكر', prereqs: ['1-3-1'],
+    instruction: {
+      explanation: `<b>مبدأ باولي للاستبعاد (Pauli Exclusion Principle):</b> لا يمكن لإلكترونين في نفس الذرة أن يكون لهما نفس أعداد الكم الأربعة.<br><br><b>النتيجة العملية:</b> كل مجال ذري يتسع <b>لإلكترونين فقط</b>، ويدوران باتجاهين متعاكسين: أحدهما <span class="ltr">spin up (↑)</span> والآخر <span class="ltr">spin down (↓)</span>.`,
+      prompt: 'ما نص مبدأ باولي، وكم إلكتروناً يتسع له المجال الواحد؟'
+    },
+    remediation: {
+      analogy: 'تخيل غرفة بسريرين: يمكن لشخصين النوم فيها، لكن لا يمكنهما النوم في نفس السرير. الإلكترونان يشغلان نفس المجال لكن بحالة دوران مختلفة.',
+      explanation: 'مبدأ باولي يحدد سعة كل مجال بإلكترونين فقط، بشرط اختلاف اتجاه الدوران بينهما. ثلاث إلكترونات في مجال واحد مستحيلة.'
+    }
+  },
+  {
+    id: '1-3-3', order: 3,
+    text: 'أن يعرف الطالب قاعدة هوند.',
+    bloom: 'تذكر', prereqs: ['1-3-2'],
+    instruction: {
+      explanation: `<b>قاعدة هوند (Hund's Rule):</b> عند ملء مجالات فرعية متساوية الطاقة، يملأ الإلكترون كل مجال فرادى أولاً قبل أن يبدأ بالازدواج.<br><br><b>مثال:</b> المجالات الثلاثة <span class="ltr">2p</span>:<br><span class="ltr">2p¹ = [↑][ ][ ]</span><br><span class="ltr">2p² = [↑][↑][ ]</span><br><span class="ltr">2p³ = [↑][↑][↑]</span><br><span class="ltr">2p⁴ = [↑↓][↑][↑]</span>`,
+      prompt: 'ما قاعدة هوند عند ملء المجالات المتساوية الطاقة؟'
+    },
+    remediation: {
+      analogy: 'مثل الجلوس في الباص: يُفضّل الركاب الجلوس في مقاعد فارغة أولاً قبل مشاركة مقعد مع آخر.',
+      explanation: 'قاعدة هوند تعني: لا تبدأ الازدواج إلا بعد أن تشغل كل مجال فرعي بإلكترون واحد. في <span class="ltr">2p³</span>: إلكترون واحد في كل مجال من الثلاثة، وليس إلكترونان في الأول وواحد في الثاني.'
+    }
+  },
+  {
+    id: '1-3-4', order: 4,
+    text: 'أن يطبق الطالب مبادئ أوفباو وباولي وهوند لكتابة التوزيع الإلكتروني.',
+    bloom: 'تطبيق', prereqs: ['1-3-3'],
+    instruction: {
+      explanation: `لكتابة التوزيع الإلكتروني، نتبع القواعد الثلاث معاً:<br><br>1. <b>أوفباو:</b> ابدأ من الأقل طاقة: <span class="ltr">1s → 2s → 2p → 3s → 3p → 4s → 3d → 4p</span>.<br>2. <b>باولي:</b> 2 إلكترون حد أقصى في كل مجال (بالأس ²).<br>3. <b>هوند:</b> في المجالات المتساوية، إلكترونات فرادى أولاً.<br><br><b>مثال — الأكسجين (Z=8):</b><br><span class="ltr">1s² 2s² 2p⁴</span><br>في <span class="ltr">2p</span>: إلكترونان في مجالين فرادى، ثم الثالث والرابع.`,
+      prompt: 'اكتب التوزيع الإلكتروني للصوديوم (Z=11).'
+    },
+    remediation: {
+      analogy: 'التوزيع الإلكتروني مثل "عنوان بيت الإلكترونات": يخبرك بمكان كل إلكترون في الفندق (الذرة)، في أي طابق (n) وأي غرفة (المجال الفرعي) وأي سرير (المجال).',
+      explanation: 'للصوديوم (Z=11): املأ بالترتيب: <span class="ltr">1s² 2s² 2p⁶ 3s¹</span>. المجموع: <span class="ltr">2+2+6+1 = 11</span>.'
+    }
+  },
+  {
+    id: '1-3-5', order: 5,
+    text: 'أن يعبر الطالب عن التوزيع الإلكتروني برسم مربعات المجالات وترميز الغاز النبيل.',
+    bloom: 'تطبيق', prereqs: ['1-3-4'],
+    instruction: {
+      explanation: `<b>مربعات المجالات:</b> كل مجال يُرسم كمربع. سهم <span class="ltr">↑</span> يمثل الإلكترون الأول، <span class="ltr">↓</span> يمثل الثاني. مثال:<br><span class="ltr">2p³ = [↑][↑][↑]</span><br><span class="ltr">2p⁴ = [↑↓][↑][↑]</span><br><br><b>ترميز الغاز النبيل:</b> يُختصر التوزيع بذكر الغاز النبيل السابق بين قوسين ثم بقية التوزيع.<br><br><b>مثال — الصوديوم (Z=11):</b><br>بدل <span class="ltr">1s² 2s² 2p⁶ 3s¹</span><br>نكتب: <span class="ltr">[Ne] 3s¹</span>`,
+      prompt: 'عبّر عن توزيع الأكسجين (Z=8) باستخدام مربعات المجالات، ثم بترميز الغاز النبيل.'
+    },
+    remediation: {
+      analogy: 'ترميز الغاز النبيل مثل الاختصار: بدل أن تكتب "الطوابق 1 و2 كاملة"، تقول "الطوابق حتى الثاني ممتلئة، وأضف الغرفة كذا في الطابق 3".',
+      explanation: 'الأكسجين (Z=8): <span class="ltr">1s² 2s² 2p⁴</span> = <span class="ltr">[He] 2s² 2p⁴</span> (لأن <span class="ltr">1s²</span> هو توزيع الهيليوم). مربعات <span class="ltr">2p⁴</span>: <span class="ltr">[↑↓][↑][↑]</span>.'
+    }
+  },
+  {
+    id: '1-3-6', order: 6,
+    text: 'أن يحدد الطالب إلكترونات التكافؤ ويرسم التمثيل النقطي (نموذج لويس).',
+    bloom: 'فهم', prereqs: ['1-3-5'],
+    instruction: {
+      explanation: `<b>إلكترونات التكافؤ:</b> الإلكترونات في أعلى مستوى طاقة رئيسي. هذه الإلكترونات هي المسؤولة عن السلوك الكيميائي.<br><br><b>كيف نحددها؟</b> للعناصر الممثلة (المجموعات 1، 2، 13-18):<br>- المجموعة 1: 1 إلكترون تكافؤ.<br>- المجموعة 2: 2.<br>- المجموعة 13: 3.<br>- المجموعة 14: 4.<br>- المجموعة 15: 5.<br>- المجموعة 16: 6.<br>- المجموعة 17: 7.<br>- المجموعة 18: 8 (ما عدا الهيليوم = 2).<br><br><b>التمثيل النقطي (لويس):</b> رمز العنصر + النقاط حوله (كل نقطة = إلكترون تكافؤ).<br><b>أمثلة:</b><br><span class="ltr">Na·</span> (نقطة واحدة)<br><span class="ltr">·Mg·</span> (نقطتان)<br><span class="ltr">·Cl···</span> (سبع نقاط)`,
+      prompt: 'كيف تحدد عدد إلكترونات التكافؤ لعنصر ممثل؟ وما علاقته بالتمثيل النقطي؟'
+    },
+    remediation: {
+      analogy: 'إلكترونات التكافؤ مثل "ملابس الخروج": هي التي تظهر للعالم الخارجي وتتفاعل مع الآخرين. الإلكترونات الداخلية تبقى في المنزل.',
+      explanation: 'عدد إلكترونات التكافؤ = رقم المجموعة (1-2) أو رقم المجموعة ناقص 10 (للمجموعات 13-18). في التمثيل النقطي، نضع نقطة لكل إلكترون تكافؤ حول رمز العنصر.'
+    }
+  }
+];
+
+const ITEMS = {
+  '1-3-1': [
+    { q: 'مبدأ أوفباو ينص على:', opts: ['ملء المجالات من الأعلى طاقة إلى الأقل', 'ملء المجالات من الأقل طاقة إلى الأعلى', 'ملء المجالات عشوائياً', 'ملء مجال <span class="ltr">s</span> فقط'], ans: 1, expl: 'أوفباو = البناء التصاعدي، من الأقل طاقة إلى الأعلى.', wrongMap: { "0": 'عكس الترتيب.', "2": 'الملء منظم.', "3": 'نملأ كل المجالات لا واحداً فقط.' } },
+    { q: 'المجال الذي يُملأ أولاً هو:', opts: ['<span class="ltr">1s</span>', '<span class="ltr">2p</span>', '<span class="ltr">3d</span>', '<span class="ltr">4p</span>'], ans: 0, expl: '<span class="ltr">1s</span> هو الأقل طاقة، يُملأ أولاً.', wrongMap: { "1": 'يأتي بعد <span class="ltr">1s</span> و<span class="ltr">2s</span>.', "2": 'يأتي متأخراً.', "3": 'يأتي متأخراً.' } },
+    { q: 'الترتيب الصحيح لملء المجالات:', opts: ['<span class="ltr">2p → 2s → 1s</span>', '<span class="ltr">1s → 2s → 2p → 3s</span>', '<span class="ltr">3d → 4s → 3p</span>', '<span class="ltr">4p → 3d → 4s</span>'], ans: 1, expl: '<span class="ltr">1s → 2s → 2p → 3s</span> هو الترتيب الصحيح (من الأقل طاقة للأعلى).', wrongMap: { "0": 'ترتيب معكوس.', "2": '<span class="ltr">4s</span> قبل <span class="ltr">3d</span>.', "3": 'ترتيب معكوس.' } }
+  ],
+  '1-3-2': [
+    { q: 'مبدأ باولي للاستبعاد ينص على:', opts: ['كل مجال يتسع لإلكترون واحد فقط', 'لا يمكن لإلكترونين في نفس الذرة أن يكون لهما نفس أعداد الكم الأربعة', 'تملأ المجالات فرادى أولاً', 'الإلكترونات تُملأ عشوائياً'], ans: 1, expl: 'هذا هو نص مبدأ باولي.', wrongMap: { "0": 'المجال يتسع لاثنين.', "2": 'هذه قاعدة هوند.', "3": 'الملء منظم.' } },
+    { q: 'أقصى عدد من الإلكترونات في مجال واحد:', opts: ['<span class="ltr">1</span>', '<span class="ltr">2</span>', '<span class="ltr">3</span>', '<span class="ltr">6</span>'], ans: 1, expl: 'حد أقصى إلكترونان في مجال واحد.', wrongMap: { "0": 'إلكترونان لا واحد.', "2": 'ثلاثة غير مسموح.', "3": 'ستة للمجال الفرعي لا المجال.' } },
+    { q: 'الإلكترونان في نفس المجال:', opts: ['يدوران بنفس الاتجاه', 'يدوران باتجاهين متعاكسين', 'لا يدوران', 'يندمجان'], ans: 1, expl: 'باتجاهين متعاكسين (spin up و spin down).', wrongMap: { "0": 'يخالف مبدأ باولي.', "2": 'الدوران خاصية أصيلة.', "3": 'لا اندماج.' } }
+  ],
+  '1-3-3': [
+    { q: 'قاعدة هوند تنص على:', opts: ['تملأ المجالات فرادى أولاً قبل الازدواج', 'تملأ المجالات بالإلكترونات المزدوجة أولاً', 'لا يمكن ملء مجالين فرعيين معاً', 'كل مجال يتسع لإلكترون واحد'], ans: 0, expl: 'قاعدة هوند = فرادى أولاً، ثم ازدواج.', wrongMap: { "1": 'عكس القاعدة.', "2": 'يمكن.', "3": 'اثنان مسموح.' } },
+    { q: 'في المجالات الثلاثة <span class="ltr">p</span>، عند وضع إلكترونين:', opts: ['يوضعان في نفس المجال', 'يوضعان في مجالين مختلفين فرادى', 'يُمنع وضعهما', 'يوضعان في 3 مجالات'], ans: 1, expl: 'حسب هوند: إلكترون في كل مجال فرادى.', wrongMap: { "0": 'يخالف هوند.', "2": 'مسموح.', "3": 'إلكترونان في مجالين فقط.' } },
+    { q: 'قاعدة هوند تطبق على:', opts: ['مجالات مختلفة الطاقة', 'مجالات متساوية الطاقة', 'النواة', 'النيوترونات'], ans: 1, expl: 'هوند تطبق على المجالات المتساوية الطاقة (degenerate orbitals).', wrongMap: { "0": 'المختلفة تُملأ حسب أوفباو.', "2": 'قاعدة إلكترونية.', "3": 'لا علاقة بالنيوترونات.' } }
+  ],
+  '1-3-4': [
+    { q: 'التوزيع الإلكتروني للكربون (Z=6):', opts: ['<span class="ltr">1s² 2s² 2p²</span>', '<span class="ltr">1s² 2s⁴</span>', '<span class="ltr">1s⁴ 2s²</span>', '<span class="ltr">1s² 2p⁴</span>'], ans: 0, expl: '<span class="ltr">1s² 2s² 2p²</span> = 6 إلكترونات.', wrongMap: { "1": '<span class="ltr">2s</span> يتسع لإلكترونين فقط.', "2": '<span class="ltr">1s</span> يتسع لإلكترونين فقط.', "3": 'يجب ملء <span class="ltr">2s</span> أولاً.' } },
+    { q: 'التوزيع الإلكتروني للصوديوم (Z=11):', opts: ['<span class="ltr">1s² 2s² 2p⁶ 3s¹</span>', '<span class="ltr">1s² 2s² 2p⁵ 3s²</span>', '<span class="ltr">1s² 2s² 3s² 2p⁵</span>', '<span class="ltr">1s¹ 2s² 2p⁸</span>'], ans: 0, expl: 'الترتيب الصحيح: <span class="ltr">1s² 2s² 2p⁶ 3s¹</span> = 11.', wrongMap: { "1": 'يخالف الترتيب.', "2": 'ترتيب خاطئ.', "3": '<span class="ltr">2p</span> يتسع لستة فقط.' } },
+    { q: 'عدد الإلكترونات في <span class="ltr">2p</span> للأكسجين (Z=8):', opts: ['<span class="ltr">2</span>', '<span class="ltr">4</span>', '<span class="ltr">6</span>', '<span class="ltr">0</span>'], ans: 1, expl: '<span class="ltr">1s² 2s² 2p⁴</span> — إذن <span class="ltr">2p</span> فيه 4.', wrongMap: { "0": 'اثنان في <span class="ltr">2s</span>.', "2": 'ستة هو الحد الأقصى.', "3": 'يوجد إلكترونات.' } }
+  ],
+  '1-3-5': [
+    { q: 'ترميز الغاز النبيل للأكسجين (Z=8):', opts: ['<span class="ltr">[He] 2s² 2p⁴</span>', '<span class="ltr">[Ne] 2p⁴</span>', '<span class="ltr">[Ne] 3s²</span>', '<span class="ltr">[Ar] 2p⁴</span>'], ans: 0, expl: '<span class="ltr">[He]</span> = <span class="ltr">1s²</span>، ثم الباقي <span class="ltr">2s² 2p⁴</span>.', wrongMap: { "1": 'النيون يأتي بعد الأكسجين.', "2": 'النيون بعده.', "3": 'الأرجون بعده.' } },
+    { q: 'رسم مربعات <span class="ltr">2p³</span> يظهر:', opts: ['<span class="ltr">[↑↓][↑][ ]</span>', '<span class="ltr">[↑][↑][↑]</span>', '<span class="ltr">[↑↓][↑↓][↑]</span>', '<span class="ltr">[ ][ ][ ]</span>'], ans: 1, expl: 'حسب قاعدة هوند: إلكترون واحد في كل مجال.', wrongMap: { "0": 'يخالف هوند.', "2": '5 إلكترونات هنا.', "3": 'فارغ.' } },
+    { q: 'ترميز الغاز النبيل للصوديوم (Z=11):', opts: ['<span class="ltr">[Ne] 3s¹</span>', '<span class="ltr">[He] 3s¹</span>', '<span class="ltr">[Ar] 3s¹</span>', '<span class="ltr">[Ne] 3p¹</span>'], ans: 0, expl: '<span class="ltr">[Ne] = 1s² 2s² 2p⁶</span>، ثم <span class="ltr">3s¹</span>.', wrongMap: { "1": '<span class="ltr">[He]</span> يختصر <span class="ltr">1s²</span> فقط.', "2": '<span class="ltr">[Ar]</span> أكبر من الصوديوم.', "3": '<span class="ltr">3s</span> لا <span class="ltr">3p</span>.' } }
+  ],
+  '1-3-6': [
+    { q: 'إلكترونات التكافؤ للصوديوم (Z=11، المجموعة 1):', opts: ['<span class="ltr">0</span>', '<span class="ltr">1</span>', '<span class="ltr">2</span>', '<span class="ltr">3</span>'], ans: 1, expl: 'المجموعة 1 = إلكترون تكافؤ واحد.', wrongMap: { "0": 'لا يوجد عنصر بصفر تكافؤ.', "2": 'هذا للمجموعة 2.', "3": 'هذا للمجموعة 13.' } },
+    { q: 'التمثيل النقطي للكلور (المجموعة 17):', opts: ['<span class="ltr">·Cl</span> (نقطة)', '<span class="ltr">··Cl</span> (نقطتان)', '<span class="ltr">·Cl···</span> (سبع نقاط)', '<span class="ltr">·················</span> (17 نقطة)'], ans: 2, expl: 'المجموعة 17 = 7 إلكترونات تكافؤ.', wrongMap: { "0": 'هذا للمجموعة 1.', "1": 'هذا للمجموعة 2.', "3": 'التكافؤ لا يشمل كل الإلكترونات.' } },
+    { q: 'إلكترونات التكافؤ للنيون (Z=10، المجموعة 18):', opts: ['<span class="ltr">2</span>', '<span class="ltr">8</span>', '<span class="ltr">10</span>', '<span class="ltr">0</span>'], ans: 1, expl: 'الغاز النبيل: 8 إلكترونات تكافؤ (ما عدا He = 2).', wrongMap: { "0": 'هذا للهيليوم.', "2": '10 هو العدد الكلي لا التكافؤ.', "3": 'لا يوجد غاز نبيل بصفر.' } }
+  ]
+};
+
+const Store = (() => {
+  let backend = null, db = null;
+  const mem = { student: [], progress: [], attempts: [], certificates: [] };
+  const DB_NAME = 'chem21-shared';
+  function tryIDB() {
+    return new Promise((resolve) => {
+      let req;
+      try { req = indexedDB.open(DB_NAME, 1); } catch (e) { resolve(false); return; }
+      req.onupgradeneeded = e => {
+        const d = e.target.result;
+        if (!d.objectStoreNames.contains('student')) d.createObjectStore('student', { keyPath: 'id' });
+        if (!d.objectStoreNames.contains('progress')) d.createObjectStore('progress', { keyPath: 'objectiveId' });
+        if (!d.objectStoreNames.contains('attempts')) d.createObjectStore('attempts', { keyPath: 'id', autoIncrement: true });
+        if (!d.objectStoreNames.contains('certificates')) d.createObjectStore('certificates', { keyPath: 'id' });
+      };
+      req.onsuccess = e => { db = e.target.result; resolve(true); };
+      req.onerror = () => resolve(false);
+      req.onblocked = () => resolve(false);
+    });
+  }
+  function tryLS() { try { localStorage.setItem('__ct__', '1'); localStorage.removeItem('__ct__'); return true; } catch (e) { return false; } }
+  function lsAll(s) { try { return JSON.parse(localStorage.getItem(DB_NAME + ':' + s) || '[]'); } catch (e) { return []; } }
+  function lsSave(s, a) { try { localStorage.setItem(DB_NAME + ':' + s, JSON.stringify(a)); } catch (e) {} }
+  return {
+    get backend() { return backend; },
+    open: async function() {
+      if (await tryIDB()) { backend = 'idb'; return; }
+      if (tryLS()) { backend = 'ls'; return; }
+      backend = 'mem';
+    },
+    getAll: async function(s) {
+      if (backend === 'idb') return new Promise((res, rej) => { const tx = db.transaction(s, 'readonly'); const r = tx.objectStore(s).getAll(); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+      if (backend === 'ls') return lsAll(s);
+      return mem[s].slice();
+    },
+    put: async function(s, v) {
+      if (backend === 'idb') return new Promise((res, rej) => { const tx = db.transaction(s, 'readwrite'); const r = tx.objectStore(s).put(v); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+      const kf = s === 'progress' ? 'objectiveId' : 'id';
+      if (backend === 'ls') {
+        const a = lsAll(s);
+        if (s === 'attempts') { v.id = Date.now() + Math.random(); a.push(v); }
+        else { const i = a.findIndex(x => x[kf] === v[kf]); if (i >= 0) a[i] = v; else a.push(v); }
+        lsSave(s, a); return;
+      }
+      if (s === 'attempts') { v.id = Date.now() + Math.random(); mem[s].push(v); }
+      else { const i = mem[s].findIndex(x => x[kf] === v[kf]); if (i >= 0) mem[s][i] = v; else mem[s].push(v); }
+    },
+    clear: async function(s) {
+      if (backend === 'idb') return new Promise((res, rej) => { const tx = db.transaction(s, 'readwrite'); const r = tx.objectStore(s).clear(); r.onsuccess = () => res(); r.onerror = () => rej(r.error); });
+      if (backend === 'ls') { lsSave(s, []); return; }
+      mem[s] = [];
+    }
+  };
+})();
+
+function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function shuffle(arr) { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function todayHijri() { try { return new Date().toLocaleDateString('ar-SA-u-ca-islamic'); } catch (e) { return new Date().toLocaleDateString('ar-SA'); } }
+function todayGreg() { return new Date().toLocaleDateString('ar-SA-u-ca-gregory'); }
+function hashStr(s) { let h = 0; for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0; return Math.abs(h).toString(36).toUpperCase().slice(0, 8); }
+function certCode(type, subject) {
+  const seed = String(state.student.id) + type + subject + Date.now() + Math.random();
+  return 'K21-' + type + '-' + subject + '-' + hashStr(seed);
+}
+function isReflectionValid(text, objectiveId) {
+  const trimmed = text.trim();
+  if (trimmed.length < 20) return { ok: false, msg: 'يجب أن تكتب 20 حرفًا على الأقل.' };
+  const words = trimmed.split(/\s+/).filter(w => w.length > 0);
+  if (words.length < 3) return { ok: false, msg: 'يجب أن تكتب 3 كلمات على الأقل.' };
+  const chars = trimmed.replace(/\s+/g, '');
+  const counts = {}; let max = 0;
+  for (const c of chars) { counts[c] = (counts[c] || 0) + 1; if (counts[c] > max) max = counts[c]; }
+  if (max / chars.length > 0.5) return { ok: false, msg: 'اكتب شرحًا حقيقيًا (لا تكرر حرفًا واحدًا).' };
+  if (objectiveId && REFLECTION_KEYWORDS[objectiveId]) {
+    const kws = REFLECTION_KEYWORDS[objectiveId];
+    let found = false;
+    for (let i = 0; i < kws.length; i++) { if (trimmed.indexOf(kws[i]) !== -1) { found = true; break; } }
+    if (!found) return { ok: false, msg: 'اذكر مفهومًا واحدًا على الأقل من الدرس (مثل: ' + kws.slice(0, 3).join('، ') + ').' };
+  }
+  return { ok: true };
+}
+function storageWarning() {
+  if (Store.backend === 'mem') return '<div class="storage-warn">⚠️ التخزين غير متاح (file://). شغّل خادمًا محليًا.</div>';
+  if (Store.backend === 'ls') return '<div class="storage-warn">ℹ️ التخزين عبر localStorage (بديل).</div>';
+  return '';
+}
+
+async function getStudent() { const a = await Store.getAll('student'); return a[0] || null; }
+async function saveStudent(s) { await Store.put('student', s); }
+
+function prereqsSatisfied(objId, progress) {
+  const obj = OBJECTIVES.find(o => o.id === objId);
+  if (!obj) return false;
+  for (const p of obj.prereqs) {
+    if (EXTERNAL_PREREQS.indexOf(p) !== -1) continue;
+    const pr = progress.find(x => x.objectiveId === p);
+    if (!pr || pr.state !== 'MASTERED') return false;
+  }
+  return true;
+}
+
+async function initializeProgress() {
+  const existing = await Store.getAll('progress');
+  const existingForLesson = existing.filter(p => (p.lessonId === LESSON_ID) || (p.objectiveId && p.objectiveId.indexOf(LESSON_ID + '-') === 0));
+  if (existingForLesson.length === OBJECTIVES.length) return existing;
+  for (const o of OBJECTIVES) {
+    const existingObj = existing.find(x => x.objectiveId === o.id);
+    if (!existingObj) {
+      const r = {
+        objectiveId: o.id, lessonId: LESSON_ID, chapterId: CHAPTER_ID,
+        state: prereqsSatisfied(o.id, existing) ? 'AVAILABLE' : 'LOCKED',
+        masteryScore: 0, remediationRounds: 0, lastAttemptAt: null, masteredAt: null
+      };
+      await Store.put('progress', r);
+    }
+  }
+  return await Store.getAll('progress');
+}
+
+async function updateProgress(objId, patch) {
+  const p = state.progress.find(x => x.objectiveId === objId);
+  Object.assign(p, patch);
+  await Store.put('progress', p);
+}
+function getProgress(objId) { return state.progress.find(x => x.objectiveId === objId); }
+async function unlockDependents() {
+  for (const o of OBJECTIVES) {
+    const p = getProgress(o.id);
+    if (p.state === 'LOCKED' && prereqsSatisfied(o.id, state.progress)) {
+      p.state = 'AVAILABLE';
+      await Store.put('progress', p);
+    }
+  }
+}
+function totalMastered() { return OBJECTIVES.filter(o => getProgress(o.id).state === 'MASTERED').length; }
+
+let state = { student: null, progress: [], currentObjective: null };
+const view = document.getElementById('view');
+
+function resetView() {
+  view.innerHTML = '';
+  const warn = storageWarning();
+  if (warn) view.insertAdjacentHTML('beforeend', warn);
+}
+
+const GROUPS = [
+  { title: 'المجموعة الأولى: المبادئ الثلاثة', start: 0, end: 3 },
+  { title: 'المجموعة الثانية: التطبيق والتمثيل', start: 3, end: 6 }
+];
+
+function renderLessonHome() {
+  resetView();
+  const lessonProgress = state.progress.filter(p => (p.lessonId === LESSON_ID) || (p.objectiveId && p.objectiveId.indexOf(LESSON_ID + '-') === 0));
+  const mastered = lessonProgress.filter(p => p.state === 'MASTERED').length;
+  const total = OBJECTIVES.length;
+  const pct = total > 0 ? Math.round(mastered / total * 100) : 0;
+  view.insertAdjacentHTML('beforeend', `
+    <div class="breadcrumb">
+      <div><a href="index.html">🏠 الرئيسية</a> · <span>${LESSON_CODE} · الفصل الأول: الإلكترونات في الذرة</span></div>
+      <a href="index.html" class="btn outline" style="font-size:.8rem;padding:.3rem .6rem;">عودة للمنهج</a>
+    </div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem">
+        <div><b>${LESSON_CODE} · ${LESSON_TITLE}</b></div>
+        <div class="muted">${mastered} / ${total} هدفًا متقنًا (<bdi>${pct}%</bdi>)</div>
+      </div>
+      <div class="progress-bar"><div style="width:${pct}%"></div></div>
+    </div>
+    <div id="obj-list"></div>
+    <div id="cert-area" style="margin-top:1.5rem"></div>`);
+  const list = document.getElementById('obj-list');
+  GROUPS.forEach(group => {
+    const groupTitle = document.createElement('div');
+    groupTitle.className = 'group-title';
+    groupTitle.textContent = group.title;
+    list.appendChild(groupTitle);
+    OBJECTIVES.slice(group.start, group.end).forEach(o => {
+      const p = getProgress(o.id);
+      if (!p) return;
+      const labels = { LOCKED: 'مقفل 🔒', AVAILABLE: 'متاح', MASTERED: 'متقن ✓', DIAGNOSTIC: 'قيد التعلّم', INSTRUCTION: 'قيد التعلّم', CHECK: 'قيد التعلّم', REMEDIATION: 'يحتاج معالجة', RECHECK: 'قيد التعلّم' };
+      const cls = p.state === 'LOCKED' ? 'locked' : (p.state === 'MASTERED' ? 'mastered' : '');
+      const row = document.createElement('button');
+      row.type = 'button';
+      row.className = 'objective-row ' + cls;
+      row.innerHTML = '<div class="obj-text"><div><span class="obj-id ltr">' + o.id + '</span> <span class="state-badge state-' + p.state + '">' + labels[p.state] + '</span></div><div style="margin-top:.35rem" dir="auto">' + o.text + '</div></div><div style="font-size:.85rem;color:var(--text-sec);white-space:nowrap">' + o.bloom + '</div>';
+      row.addEventListener('click', () => {
+        if (p.state === 'LOCKED') { alert('يتطلب إتقان الهدف السابق أولًا.'); return; }
+        state.currentObjective = o.id;
+        renderObjective();
+      });
+      list.appendChild(row);
+    });
+  });
+  const certArea = document.getElementById('cert-area');
+  if (mastered === total) {
+    certArea.innerHTML = '<button class="primary" id="btn-cert" style="width:100%">🎓 استخرج شهادة إتمام الدرس</button>';
+    document.getElementById('btn-cert').addEventListener('click', renderCertificate);
+  } else {
+    certArea.innerHTML = '<p class="muted" style="text-align:center">أكمل الأهداف الستة لاستخراج شهادة إتمام الدرس (' + mastered + '/' + total + ').</p>';
+  }
+}
+
+async function renderObjective() {
+  const obj = OBJECTIVES.find(o => o.id === state.currentObjective);
+  const p = getProgress(obj.id);
+  if (p.state === 'AVAILABLE') { await updateProgress(obj.id, { state: 'DIAGNOSTIC' }); runDiagnostic(obj); }
+  else if (p.state === 'DIAGNOSTIC') runDiagnostic(obj);
+  else if (p.state === 'INSTRUCTION') showInstruction(obj);
+  else if (p.state === 'CHECK') runCheck(obj, 'check');
+  else if (p.state === 'REMEDIATION') showRemediation(obj);
+  else if (p.state === 'RECHECK') runCheck(obj, 'recheck');
+  else if (p.state === 'MASTERED') showMastered(obj);
+  else renderLessonHome();
+}
+
+function buildFeedback(item, chosenIdx) {
+  if (chosenIdx === item.ans) {
+    return '<div class="feedback correct">✓ إجابة صحيحة<br>' + item.expl + '</div>';
+  }
+  let hint = (item.wrongMap && item.wrongMap[String(chosenIdx)]) ? item.wrongMap[String(chosenIdx)] : '';
+  let html = '<div class="feedback wrong">✗ إجابة خاطئة<br>الإجابة الصحيحة: <b>' + item.opts[item.ans] + '</b>';
+  if (hint) html += '<br><span style="color:var(--text-sec)">' + hint + '</span>';
+  else html += '<br>' + item.expl;
+  html += '</div>';
+  return html;
+}
+
+function runDiagnostic(obj) {
+  const pool = shuffle(ITEMS[obj.id]).slice(0, 2);
+  let idx = 0, answered = false;
+  const objHeader = '<h2 style="margin-top:0" dir="auto">' + obj.text + '</h2><p class="muted">المرحلة: تشخيص سريع (' + pool.length + ' أسئلة — لا تُحتسب)</p>';
+  function showQ() {
+    answered = false;
+    if (idx >= pool.length) { updateProgress(obj.id, { state: 'INSTRUCTION' }).then(() => showInstruction(obj)); return; }
+    resetView();
+    const item = pool[idx];
+    view.insertAdjacentHTML('beforeend', '<div class="card">' + objHeader + '<div class="muted" style="margin-bottom:.5rem">السؤال ' + (idx + 1) + ' من ' + pool.length + '</div><div class="question" dir="auto">' + item.q + '</div><div class="options" id="opts"></div><button type="button" class="skip-btn" id="skip-btn">لا أعرف — أرني الإجابة</button><div id="fb" aria-live="polite"></div><div class="next-btn-wrap" id="next-wrap" style="display:none"><button type="button" class="primary" id="next-btn">التالي →</button></div><div class="row"><button class="outline" id="back-btn">← العودة للقائمة</button></div></div>');
+    document.getElementById('back-btn').addEventListener('click', renderLessonHome);
+    const optsBox = document.getElementById('opts');
+    item.opts.forEach((o, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'option';
+      b.setAttribute('dir', 'auto');
+      b.innerHTML = o;
+      b.addEventListener('click', function() {
+        if (answered) return;
+        answered = true;
+        const allOpts = optsBox.querySelectorAll('.option');
+        for (let k = 0; k < allOpts.length; k++) allOpts[k].disabled = true;
+        document.getElementById('skip-btn').disabled = true;
+        b.classList.add(i === item.ans ? 'correct' : 'wrong');
+        allOpts[item.ans].classList.add('correct');
+        document.getElementById('fb').innerHTML = buildFeedback(item, i);
+        const wrap = document.getElementById('next-wrap');
+        wrap.style.display = 'flex';
+        const nb = document.getElementById('next-btn');
+        nb.focus();
+        nb.addEventListener('click', function() { idx++; showQ(); });
+      });
+      optsBox.appendChild(b);
+    });
+    document.getElementById('skip-btn').addEventListener('click', function() {
+      if (answered) return;
+      answered = true;
+      const allOpts = optsBox.querySelectorAll('.option');
+      for (let k = 0; k < allOpts.length; k++) allOpts[k].disabled = true;
+      document.getElementById('skip-btn').disabled = true;
+      allOpts[item.ans].classList.add('correct');
+      document.getElementById('fb').innerHTML = '<div class="feedback neutral">الإجابة الصحيحة: <b>' + item.opts[item.ans] + '</b><br>' + item.expl + '</div>';
+      const wrap = document.getElementById('next-wrap');
+      wrap.style.display = 'flex';
+      const nb = document.getElementById('next-btn');
+      nb.focus();
+      nb.addEventListener('click', function() { idx++; showQ(); });
+    });
+  }
+  showQ();
+}
+
+function showInstruction(obj) {
+  resetView();
+  view.insertAdjacentHTML('beforeend', '<div class="card"><div class="breadcrumb"><button class="outline" id="back-btn">← العودة للقائمة</button></div><h2 style="margin-top:0" dir="auto">' + obj.text + '</h2><p class="muted">المرحلة: تعليم · المستوى البلومي: ' + obj.bloom + '</p><div class="prose" dir="auto">' + obj.instruction.explanation + '</div><hr style="border:none;border-top:1px solid var(--border);margin:1.5rem 0"><h3>سؤال تأملي (إلزامي)</h3><p class="muted" dir="auto">' + obj.instruction.prompt + '</p><textarea id="reflection" class="textarea" placeholder="اكتب شرحك هنا (3 كلمات على الأقل، 20 حرفًا، مع ذكر مفهوم من الدرس)..."></textarea><p class="muted" id="refl-status" aria-live="polite">لم تكتب بعد.</p><div class="row"><button id="btn-check" class="primary" disabled>أفهم، اختبرني</button><button class="outline" id="back-btn-2">← العودة للقائمة</button></div></div>');
+  document.getElementById('back-btn').addEventListener('click', renderLessonHome);
+  document.getElementById('back-btn-2').addEventListener('click', renderLessonHome);
+  const ta = document.getElementById('reflection');
+  const btn = document.getElementById('btn-check');
+  const status = document.getElementById('refl-status');
+  ta.addEventListener('input', function() {
+    const v = isReflectionValid(ta.value, obj.id);
+    btn.disabled = !v.ok;
+    status.textContent = v.ok ? '✓ جاهز' : (v.msg || '');
+  });
+  btn.addEventListener('click', async function() {
+    await Store.put('attempts', { objectiveId: obj.id, itemId: 'reflection', response: ta.value, correct: true, type: 'self_explanation', createdAt: Date.now() });
+    await updateProgress(obj.id, { state: 'CHECK' });
+    runCheck(obj, 'check');
+  });
+}
+
+function runCheck(obj, mode) {
+  const pool = shuffle(ITEMS[obj.id]);
+  let idx = 0, correct = 0, answered = false;
+  const objHeader = '<h2 style="margin-top:0" dir="auto">' + obj.text + '</h2><p class="muted">المرحلة: ' + (mode === 'check' ? 'تحقق' : 'إعادة تحقق') + ' · ' + pool.length + ' أسئلة · عتبة الإتقان <bdi>' + Math.round(THRESHOLD*100) + '%</bdi></p>';
+  async function showQ() {
+    answered = false;
+    if (idx >= pool.length) {
+      const score = correct / pool.length;
+      const p = getProgress(obj.id);
+      const rounds = p.remediationRounds || 0;
+      if (score >= THRESHOLD) {
+        await updateProgress(obj.id, { state: 'MASTERED', masteryScore: score, masteredAt: Date.now() });
+        await unlockDependents();
+        showMastered(obj);
+      } else {
+        const newRounds = mode === 'recheck' ? rounds + 1 : rounds;
+        if (newRounds >= 3) {
+          await updateProgress(obj.id, { state: 'REMEDIATION', masteryScore: score, remediationRounds: newRounds });
+          showStuck(obj);
+        } else {
+          await updateProgress(obj.id, { state: 'REMEDIATION', masteryScore: score, remediationRounds: newRounds });
+          showRemediation(obj);
+        }
+      }
+      return;
+    }
+    resetView();
+    const item = pool[idx];
+    view.insertAdjacentHTML('beforeend', '<div class="card"><div class="breadcrumb"><button class="outline" id="back-btn">← العودة للقائمة</button></div>' + objHeader + '<div class="muted" style="margin-bottom:.5rem">السؤال ' + (idx + 1) + ' من ' + pool.length + '</div><div class="question" dir="auto">' + item.q + '</div><div class="options" id="opts"></div><div id="fb" aria-live="polite"></div><div class="next-btn-wrap" id="next-wrap" style="display:none"><button type="button" class="primary" id="next-btn">التالي →</button></div></div>');
+    document.getElementById('back-btn').addEventListener('click', function() {
+      if (confirm('هل تريد الخروج من الاختبار والعودة للقائمة؟')) renderLessonHome();
+    });
+    const optsBox = document.getElementById('opts');
+    item.opts.forEach((o, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'option';
+      b.setAttribute('dir', 'auto');
+      b.innerHTML = o;
+      b.addEventListener('click', async function() {
+        if (answered) return;
+        answered = true;
+        const allOpts = optsBox.querySelectorAll('.option');
+        for (let k = 0; k < allOpts.length; k++) allOpts[k].disabled = true;
+        b.classList.add(i === item.ans ? 'correct' : 'wrong');
+        allOpts[item.ans].classList.add('correct');
+        if (i === item.ans) correct++;
+        await Store.put('attempts', { objectiveId: obj.id, itemId: item.q.slice(0, 40), response: o, correct: i === item.ans, type: mode, createdAt: Date.now() });
+        document.getElementById('fb').innerHTML = buildFeedback(item, i);
+        const wrap = document.getElementById('next-wrap');
+        wrap.style.display = 'flex';
+        const nb = document.getElementById('next-btn');
+        nb.focus();
+        nb.addEventListener('click', async function() { idx++; await showQ(); });
+      });
+      optsBox.appendChild(b);
+    });
+  }
+  showQ();
+}
+
+function showRemediation(obj) {
+  resetView();
+  view.insertAdjacentHTML('beforeend', '<div class="card"><div class="breadcrumb"><button class="outline" id="back-btn">← العودة للقائمة</button></div><h2 style="margin-top:0" dir="auto">' + obj.text + '</h2><p class="muted">المرحلة: معالجة — محتوى بديل لتقوية الفهم</p><div class="prose" dir="auto"><h3>تشبيه</h3><p>' + obj.remediation.analogy + '</p><h3>شرح بديل</h3>' + obj.remediation.explanation + '</div><div class="row" style="margin-top:1.5rem"><button id="btn-recheck" class="primary">أعد الاختبار</button><button class="outline" id="back-btn-2">← العودة للقائمة</button></div></div>');
+  document.getElementById('back-btn').addEventListener('click', renderLessonHome);
+  document.getElementById('back-btn-2').addEventListener('click', renderLessonHome);
+  document.getElementById('btn-recheck').addEventListener('click', async function() {
+    await updateProgress(obj.id, { state: 'RECHECK' });
+    runCheck(obj, 'recheck');
+  });
+}
+
+function showStuck(obj) {
+  resetView();
+  view.insertAdjacentHTML('beforeend', '<div class="card"><h2 style="margin-top:0">هذا الهدف يحتاج مراجعة إضافية</h2><p>حاولت ثلاث مرات. لا بأس — هذا طبيعي. يمكنك:</p><ul><li>مراجعة الشرح الأول للهدف.</li><li>تجربة المعالجة مرة أخرى بمحتوى مختلف.</li><li>المحاولة لاحقًا أو مشاركة تقريرك مع معلمك.</li></ul><div class="row"><button id="btn-instruction" class="primary">راجع الشرح الأول</button><button id="btn-retry" class="outline">جرب المعالجة مرة أخرى</button><button class="outline" id="back-btn">← العودة للقائمة</button></div></div>');
+  document.getElementById('back-btn').addEventListener('click', renderLessonHome);
+  document.getElementById('btn-instruction').addEventListener('click', async function() {
+    await updateProgress(obj.id, { state: 'INSTRUCTION' });
+    showInstruction(obj);
+  });
+  document.getElementById('btn-retry').addEventListener('click', function() { showRemediation(obj); });
+}
+
+function showMastered(obj) {
+  resetView();
+  const done = totalMastered();
+  const total = OBJECTIVES.length;
+  const lessonDone = done === total;
+  let primaryBtn = '';
+  if (lessonDone) {
+    primaryBtn = '<button id="btn-cert" class="primary">🎓 استخرج شهادة إتمام الدرس</button>';
+  } else {
+    primaryBtn = '<button id="btn-list" class="primary">العودة إلى أهداف الدرس</button>';
+  }
+  view.insertAdjacentHTML('beforeend', '<div class="card" style="text-align:center"><h2 style="margin-top:0;color:var(--positive)">🎉 أتقنت هذا الهدف!</h2><p dir="auto">' + obj.text + '</p><div class="progress-bar" style="margin:1.5rem 0"><div style="width:' + Math.round(done/total*100) + '%"></div></div><p class="muted">' + done + ' / ' + total + ' هدفًا متقنًا في هذا الدرس</p><div class="row" style="justify-content:center">' + primaryBtn + '<a href="index.html" class="btn outline">🏠 خريطة المنهج</a></div></div>');
+  if (lessonDone) {
+    document.getElementById('btn-cert').addEventListener('click', renderCertificate);
+  } else {
+    document.getElementById('btn-list').addEventListener('click', function() { renderLessonHome(); });
+  }
+}
+
+async function renderCertificate() {
+  resetView();
+  const existing = await Store.getAll('certificates');
+  let cert = null;
+  for (const c of existing) {
+    if (c.type === 'lesson' && c.lessonId === LESSON_ID && c.studentName === state.student.name) { cert = c; break; }
+  }
+  if (!cert) {
+    const code = certCode('L1-3', LESSON_ID);
+    cert = { id: code, type: 'lesson', lessonId: LESSON_ID, lessonCode: LESSON_CODE, studentName: state.student.name, issuedAt: Date.now() };
+    await Store.put('certificates', cert);
+  }
+  view.insertAdjacentHTML('beforeend', '<div class="certificate"><h2>شهادة إتمام درس</h2><div class="course">منصة قطابري لإتقان كيمياء 2-1</div><div style="margin-top:2rem">تشهد المنصة بأن الطالب</div><div class="name" dir="auto">' + escapeHtml(state.student.name) + '</div><div style="font-size:1.1rem">قد أتمّ بنجاح درس</div><div style="font-size:1.3rem;font-weight:600;margin:.5rem 0">' + LESSON_TITLE + ' (<span class="ltr">' + LESSON_CODE + '</span>)</div><div class="course">بتاريخ: ' + todayHijri() + ' هـ — ' + todayGreg() + ' م</div><div class="code">رقم التحقق: <span class="ltr">' + cert.id + '</span></div><div class="sig">المعلم محمد قطابري راجحي<br><span class="muted" style="font-weight:400;font-size:.85rem">مجمع العز التعليمي</span></div><div class="muted" style="margin-top:1.5rem;font-size:.8rem">هذه الشهادة صادرة من المنصة بناءً على تقدم الطالب المحفوظ على جهازه، وليست شهادة معتمدة رسميًا.</div></div><div class="row no-print" style="justify-content:center"><button id="btn-print" class="primary">🖨️ طباعة / حفظ PDF</button><a href="index.html" class="btn outline">🏠 الرئيسية</a></div>');
+  document.getElementById('btn-print').addEventListener('click', function() { window.print(); });
+}
+
+(async function() {
+  try {
+    await Store.open();
+    state.student = await getStudent();
+    if (!state.student) { renderNamePrompt(); return; }
+    await continueBoot();
+  } catch (e) {
+    view.innerHTML = '<div class="card"><h2>خطأ</h2><p>' + escapeHtml(e.message || String(e)) + '</p><a href="index.html" class="btn">🏠 الرئيسية</a></div>';
+  }
+})();
+
+function renderNamePrompt() {
+  resetView();
+  view.insertAdjacentHTML('beforeend', '<div class="card"><h2 style="margin-top:0">قبل أن تبدأ</h2><p>لم نجد اسمك في هذا المتصفح. اكتب اسمك:</p><input id="lesson-name" type="text" maxlength="50" placeholder="اسمك" style="width:100%;padding:.8rem;border:1px solid var(--border);border-radius:var(--radius);font-family:inherit;font-size:1rem;margin-bottom:1rem"><button id="lesson-start" class="primary" style="width:100%">ابدأ</button><div class="row" style="margin-top:1rem"><a href="index.html" class="btn outline">🏠 الصفحة الرئيسية</a></div></div>');
+  document.getElementById('lesson-start').addEventListener('click', async function() {
+    const name = document.getElementById('lesson-name').value.trim();
+    if (name.length < 2) { alert('اكتب اسمًا لا يقل عن حرفين'); return; }
+    state.student = { id: 'stu-' + Date.now(), name: name, createdAt: Date.now() };
+    await saveStudent(state.student);
+    await continueBoot();
+  });
+}
+
+async function continueBoot() {
+  await initializeProgress();
+  state.progress = await Store.getAll('progress');
+  renderLessonHome();
+}
+</script>
+</body>
+</html>

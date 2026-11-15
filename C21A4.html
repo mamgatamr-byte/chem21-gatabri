@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C21A4 · الكيمياء والصحة: ملاقط الليزر · منصة قطابري لإتقان كيمياء 2-1</title>
+<style>
+:root{--primary:#0e7c3a;--primary-dark:#0a5f2c;--positive:#198038;--error:#da1e28;--warning:#b28600;--bg:#fff;--surface:#f4f4f4;--surface-high:#e0e0e0;--text:#161616;--text-sec:#525252;--border:#e0e0e0;--radius:4px}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:'IBM Plex Sans Arabic','Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+body{display:flex;flex-direction:column;min-height:100vh}
+header{background:var(--surface);padding:1rem 2rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem}
+.brand h1{margin:0;font-size:1.05rem;font-weight:700;color:var(--primary)}
+.brand .sub{font-size:.82rem;color:var(--text-sec);margin-top:2px}
+.header-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+main{flex:1;max-width:820px;margin:0 auto;padding:2rem 1rem;width:100%}
+footer{text-align:center;padding:1rem;color:var(--text-sec);font-size:.82rem;border-top:1px solid var(--border)}
+button,a.btn{font-family:inherit;font-size:1rem;padding:.6rem 1.2rem;border-radius:var(--radius);border:1px solid transparent;cursor:pointer;background:var(--surface);color:var(--text);transition:.15s;text-decoration:none;display:inline-block;text-align:center}
+button:hover,a.btn:hover{background:var(--surface-high)}
+button.primary,a.btn.primary{background:var(--primary);color:#fff}
+button.primary:hover,a.btn.primary:hover{background:var(--primary-dark)}
+button.primary:disabled{background:var(--surface-high);color:var(--text-sec);cursor:not-allowed}
+button.outline{background:#fff;border:1px solid var(--border);color:var(--text)}
+button.outline:hover{background:var(--surface)}
+.fab-home{position:fixed;bottom:1.5rem;left:1.5rem;width:54px;height:54px;border-radius:50%;background:var(--primary);color:#fff;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(14,124,58,0.45);font-size:1.5rem;display:flex;align-items:center;justify-content:center;z-index:50;padding:0;transition:transform .15s,background .15s;text-decoration:none}
+.fab-home:hover{background:var(--primary-dark);transform:scale(1.08);text-decoration:none;color:#fff}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1rem}
+.breadcrumb{font-size:.85rem;color:var(--text-sec);margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center}
+.breadcrumb a{color:var(--primary);text-decoration:none}
+.breadcrumb a:hover{text-decoration:underline}
+.group-title{margin:1.5rem 0 .7rem;font-size:1rem;font-weight:700;color:var(--primary);border-bottom:2px solid var(--primary);padding-bottom:.3rem}
+.objective-row{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.2rem;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:.5rem;cursor:pointer;transition:.15s;background:#fff;width:100%;font-family:inherit;font-size:inherit;text-align:right;color:var(--text)}
+.objective-row > *:not(:first-child){margin-right:1rem}
+.objective-row:hover{border-color:var(--primary)}
+.objective-row.locked{opacity:.5;cursor:not-allowed;background:var(--surface)}
+.objective-row.mastered{border-color:var(--positive);background:#edf7f0}
+.obj-text{flex:1;font-size:.95rem}
+.obj-id{font-family:monospace;font-size:.8rem;color:var(--text-sec);margin-left:.5rem}
+.state-badge{display:inline-block;padding:.2rem .6rem;border-radius:999px;font-size:.72rem;font-weight:600;white-space:nowrap}
+.state-AVAILABLE{background:#edf7f0;color:var(--primary)}
+.state-LOCKED{background:var(--surface-high);color:var(--text-sec)}
+.state-MASTERED{background:#edf7f0;color:var(--positive)}
+.state-DIAGNOSTIC,.state-INSTRUCTION,.state-CHECK,.state-REMEDIATION,.state-RECHECK{background:#fff3e0;color:var(--warning)}
+.question{font-size:1.08rem;font-weight:500;margin-bottom:1rem;line-height:1.5}
+.options{display:flex;flex-direction:column}
+.options > * + *{margin-top:.5rem}
+.option{padding:.85rem 1.1rem;border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:.15s;font-size:.95rem;background:#fff;color:var(--text);font-family:inherit;text-align:right;width:100%;display:block}
+.option:hover:not(:disabled){border-color:var(--primary);background:#f5fbf7}
+.option.correct{border-color:var(--positive);background:#edf7f0}
+.option.wrong{border-color:var(--error);background:#fef2f2}
+.option:disabled{cursor:default;opacity:1}
+.feedback{margin-top:1rem;padding:1rem;border-radius:var(--radius);font-size:.92rem}
+.feedback.correct{background:#edf7f0;border-right:4px solid var(--positive)}
+.feedback.wrong{background:#fef2f2;border-right:4px solid var(--error)}
+.feedback.neutral{background:#edf7f0;border-right:4px solid var(--primary)}
+.next-btn-wrap{margin-top:1rem;display:flex;justify-content:flex-start}
+.next-btn-wrap button{min-width:140px}
+.progress-bar{height:8px;background:var(--surface);border-radius:4px;overflow:hidden;margin:.5rem 0}
+.progress-bar>div{height:100%;background:var(--primary);transition:width .3s}
+.textarea{width:100%;min-height:110px;padding:1rem;border:1px solid var(--border);border-radius:var(--radius);font-family:inherit;font-size:1rem;resize:vertical}
+.prose h3{margin-top:1.5rem;margin-bottom:.5rem;color:var(--primary);font-size:1.05rem}
+.prose ul,.prose ol{padding-right:1.5rem}
+.prose table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+.prose th,.prose td{padding:.5rem;border:1px solid var(--border);text-align:right}
+.prose th{background:var(--surface)}
+.certificate{background:#fff;border:8px double var(--primary);padding:3rem 2rem;text-align:center;margin:2rem 0}
+.certificate h2{color:var(--primary);font-size:1.7rem;margin-top:0}
+.certificate .name{font-size:2rem;font-weight:700;margin:1.5rem 0}
+.certificate .course{font-size:1.1rem;color:var(--text-sec)}
+.certificate .code{font-family:monospace;font-size:.85rem;color:var(--text-sec);margin-top:2rem}
+.certificate .sig{margin-top:3rem;font-weight:600;font-size:1rem}
+.muted{color:var(--text-sec);font-size:.88rem}
+.row{display:flex;flex-wrap:wrap;margin:1rem -.25rem 0}
+.row > *{margin:0 .25rem .5rem}
+.hidden{display:none}
+.skip-btn{background:#fff;color:var(--text-sec);border-style:dashed;margin-top:.5rem}
+.skip-btn:hover{background:var(--surface)}
+.storage-warn{background:#fff3e0;border:1px solid var(--warning);color:#7a4f00;padding:.7rem 1rem;border-radius:var(--radius);font-size:.85rem;margin-bottom:1rem}
+.ltr,.bdi{direction:ltr;unicode-bidi:isolate;display:inline-block}
+bdi{unicode-bidi:isolate}
+@media print{body *{visibility:hidden}.certificate,.certificate *{visibility:visible}.certificate{position:absolute;top:0;right:0;left:0;border:4px solid #000}.no-print{display:none!important}.fab-home{display:none!important}@page{margin:1.5cm}}
+@media(max-width:600px){header,main{padding:1rem}.certificate{padding:1.5rem 1rem}.certificate .name{font-size:1.4rem}.fab-home{bottom:1rem;left:1rem;width:48px;height:48px;font-size:1.3rem}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <h1>منصة قطابري لإتقان كيمياء 2-1</h1>
+    <div class="sub">C21A4 · الكيمياء والصحة: ملاقط الليزر · المعلم محمد قطابري راجحي</div>
+  </div>
+  <div class="header-actions">
+    <a href="index.html" class="btn outline">🏠 الرئيسية</a>
+  </div>
+</header>
+<main id="view"></main>
+<footer>مجمع العز التعليمي · تعلّم حتى الإتقان — مجانًا للجميع</footer>
+<a href="index.html" class="fab-home" aria-label="الصفحة الرئيسية" title="الصفحة الرئيسية">🏠</a>
+
+<script nomodule>
+document.getElementById('view').innerHTML = '<div class="card"><h2>متصفحك قديم</h2><p>تحتاج Chrome 61+ أو Firefox 60+ أو Safari 11+ أو Edge 16+.</p></div>';
+</script>
+<script type="module">
+const LESSON_CODE = 'C21A4';
+const LESSON_ID = '1-4';
+const CHAPTER_ID = 'A';
+const LESSON_TITLE = 'الكيمياء والصحة: ملاقط الليزر';
+const THRESHOLD = 0.67;
+const EXTERNAL_PREREQS = ['PRE-C21A1'];
+
+const REFLECTION_KEYWORDS = {
+  '1-4-1': ['ليزر', 'ضوء', 'فوتون', 'ملقط'],
+  '1-4-2': ['خلية', 'عزل', 'قوة', 'دقيق'],
+  '1-4-3': ['تردد', 'طاقة', 'تشخيص', 'فوتون'],
+  '1-4-4': ['علاج', 'رؤية', '2030', 'صحة', 'طبي']
+};
+
+/**
+ * ============================================================
+ * تنبيه توثيقي — تعهد 1 (النقل الحرفي)
+ * ============================================================
+ * مصدر الأهداف: ملف "مصفوفة تحليل منهج الكيمياء (2-1) التفاعلية"
+ *   → CURRICULUM_DATA[0].lessons[3].outcomes (الدرس الإثرائي)
+ *
+ * النص الحرفي في المصفوفة هو جملة واحدة مركّبة تُفصل بفاصلة منقوطة:
+ *   1) "يشرح كيفية توظيف الضوء المركز في التقنيات الطبية الحيوية"
+ *   2) "يربط المفاهيم الكمية بتطبيقات التشخيص الوراثي وعلاج الأمراض"
+ *
+ * الأهداف الأربعة أدناه هي تفكيك اجتهادي لهاتين الجملتين،
+ * بصيغة "أن يـ..." لتسهيل القياس والتقويم. تم بإذن المستخدم
+ * الصريح (الخيار ب — 2026-11-15).
+ *
+ * ملاحظات على التفكيك:
+ *   - الهدف 1 من حقل concepts (تعريف ملاقط الليزر).
+ *   - الهدف 2 من الجملة 1 + حقل facts (آلية العمل).
+ *   - الهدف 3 من الجملة 2 (شطر التشخيص الوراثي).
+ *   - الهدف 4 من الجملة 2 (شطر علاج الأمراض) + حقل values.
+ *
+ * TODO: عند توفر content/chapters/chapter-01.json (أو chapter-0A.json)،
+ *       يُعاد النقل الحرفي للأهداف من الملف المصدر، وتُلغى هذه الملاحظة.
+ * ============================================================
+ */
+const OBJECTIVES = [
+  {
+    id: '1-4-1', order: 1,
+    text: 'أن يعرف الطالب مفهوم ملاقط الليزر.',
+    bloom: 'تذكر', prereqs: ['PRE-C21A1'],
+    instruction: {
+      explanation: `<b>ملاقط الليزر (Optical Tweezers):</b> تقنية تستخدم <b>حزمة ليزر مركزة</b> للإمساك بالجسيمات الدقيقة (كالخلايا والجزيئات) وتحريكها وعزلها دون لمسها ميكانيكياً.<br><br><b>الفكرة الأساسية:</b> الفوتونات تحمل <b>زخماً</b> (كمية حركة). عندما تمر حزمة الليزر عبر جسيم شفاف، تنحرف الفوتونات وتنقل زخماً صغيراً للجسيم، فيندفع نحو مركز الحزمة. مجموع هذه القوى الدقيقة يمسك الجسيم.<br><br><b>التطبيقات:</b> عزل خلايا مفردة، تحليل <span class="ltr">DNA</span>، دراسة البروتينات، جراحة العيون.`,
+      prompt: 'ما ملاقط الليزر، وعلى أي مبدأ فيزيائي تعتمد؟'
+    },
+    remediation: {
+      analogy: 'تخيل أنك تمسك حبة رمل بتيار هواء خفيف جداً موجّه بدقة. تيار الهواء لا يلمس الحبة بقوة، لكنه يدفعها بلطف إلى المركز. ملاقط الليزر تفعل الشيء نفسه، لكن بفوتونات ضوئية بدل الهواء.',
+      explanation: 'ملاقط الليزر تستخدم قوة دقيقة جداً من فوتونات الليزر لالتقاط الخلايا والجزيئات. لا تلمسها ميكانيكياً، بل تدفعها نحو مركز الحزمة بقوة ضوئية صغيرة.'
+    }
+  },
+  {
+    id: '1-4-2', order: 2,
+    text: 'أن يشرح الطالب كيفية توظيف الضوء المركز لعزل الخلايا الحية دون إتلافها.',
+    bloom: 'فهم', prereqs: ['1-4-1'],
+    instruction: {
+      explanation: `<b>كيف تعزل ملاقط الليزر خلية دون إتلافها؟</b><br><br>1. تُوجَّه حزمة ليزر <b>منخفضة الطاقة</b> بدقة عبر مجهر إلى الخلية.<br>2. قوى الفوتونات الدقيقة تسحب الخلية نحو مركز الحزمة (دون لمس).<br>3. يمكن <b>تحريك</b> الحزمة لنقل الخلية إلى المكان المطلوب.<br>4. تُفصل الخلية عن الخلايا المجاورة دون جرح أو تلامس ميكانيكي.<br><br><b>لماذا لا تتلف الخلية؟</b><br>- الليزر المستخدم <b>منخفض الطاقة</b> (لا يكسر الروابط الكيميائية).<br>- لا يوجد تلامس فيزيائي (لا أطراف معدنية أو أدوات حادة).<br>- يبقى الوسط المحيط (المحلول المغذي) سليماً.`,
+      prompt: 'كيف تعزل ملاقط الليزر خلية حية من بين خلايا أخرى دون إتلافها؟'
+    },
+    remediation: {
+      analogy: 'تخيل أنك تريد إخراج كرة من صندوق مملوء بالكرات دون أن تلمس الباقي. تستخدم ملقطاً، لكن الملقط قد يخدش. ملاقط الليزر مثل "يد شفافة" تلتقط الكرة وحدها فقط.',
+      explanation: 'ملاقط الليزر تستخدم طاقة منخفضة (لا تكسر الروابط) وتعمل دون تلامس (لا تجرح). تعزل الخلية المستهدفة وتنقلها، دون أن تصيب الخلايا المجاورة بأذى.'
+    }
+  },
+  {
+    id: '1-4-3', order: 3,
+    text: 'أن يربط الطالب طاقة الفوتون وتردده بتطبيقات التشخيص الوراثي.',
+    bloom: 'تحليل', prereqs: ['1-4-2'],
+    instruction: {
+      explanation: `<b>الربط بين الكم والتشخيص الوراثي:</b><br><br>1. <b>طاقة الفوتون</b> <span class="ltr">E = hν</span> تحدد نوع التفاعل مع المادة الحية:<br>- طاقة منخفضة (تردد منخفض): مناسبة للإمساك اللطيف (لا تُتلف).<br>- طاقة متوسطة: مناسبة للتصوير والتحليل الطيفي.<br>- طاقة عالية: قد تكسر الروابط (تستخدم بحذر).<br><br>2. <b>في التشخيص الوراثي:</b> يمكن استخدام ملاقط الليزر لعزل <b>خلية مفردة</b> من دم المريض، ثم استخراج <span class="ltr">DNA</span> منها وتحليله (كشف الطفرات الجينية والأمراض الوراثية).<br><br>3. <b>التردد المناسب</b> يضمن الحصول على تشخيص دقيق دون تدمير العينة.`,
+      prompt: 'كيف ترتبط طاقة الفوتون وتردد الليزر باختيار التقنية المناسبة للتشخيص الوراثي؟'
+    },
+    remediation: {
+      analogy: 'مثل اختيار ضوء الغرفة: ضوء خافت لمراقبة نوم طفل، ضوء متوسط للقراءة، ضوء قوي للعمل الدقيق. لكل مهمة شدة الضوء المناسبة.',
+      explanation: 'الليزر منخفض الطاقة يناسب الإمساك بالخلايا الحية (لا يتلفها). الليزر المتوسط يناسب التحليل والتصوير. اختيار التردد الصحيح يضمن عزل خلية واحدة سليمة لتحليل <span class="ltr">DNA</span>.'
+    }
+  },
+  {
+    id: '1-4-4', order: 4,
+    text: 'أن يقيم الطالب دور تقنية الليزر في علاج الأمراض ودعم الطب الحيوي في المملكة وفق رؤية 2030.',
+    bloom: 'تقويم', prereqs: ['1-4-3'],
+    instruction: {
+      explanation: `<b>تقييم دور الليزر في الطب:</b><br><br><b>1. التطبيقات العلاجية:</b><br>- <b>جراحة العيون:</b> تصحيح الإبصار (تقنية <span class="ltr">LASIK</span>).<br>- <b>جراحة الأورام:</b> إزالة الأنسجة المصابة بدقة.<br>- <b>علاج الجلد:</b> إزالة التصبغات والوشوم.<br>- <b>طب الأسنان:</b> حشوات وعلاجات لثة.<br><br><b>2. دعائم رؤية 2030:</b><br>- <b>الصحة:</b> تحسين جودة الرعاية الصحية والوقاية.<br>- <b>الاقتصاد:</b> توطين التقنيات الطبية المتقدمة.<br>- <b>البحث:</b> دعم مراكز الأبحاث الحيوية في المملكة.<br><br><b>3. التحديات والقيم:</b><br>- التكلفة العالية للأجهزة.<br>- الحاجة لتدريب الكوادر الطبية.<br>- ضرورة الالتزام بمعايير السلامة (حماية العين من الأشعة).`,
+      prompt: 'قيّم دور تقنية الليزر في علاج الأمراض، وكيف تدعم رؤية 2030؟'
+    },
+    remediation: {
+      analogy: 'مثل تقييم أداة جديدة في مطبخ: مفيدة جداً (تقطع بدقة) لكنها مكلفة وتحتاج تدريباً. الليزر في الطب: دقيق وفعال، لكنه مكلف ويحتاج كوادر مدربة.',
+      explanation: 'الليزر أداة طبية عالية الدقة (جراحة العيون، الأورام، الجلد). يدعم رؤية 2030 في الصحة والبحث والاقتصاد. لكنه يحتاج تكلفة عالية وتدريباً ومعايير سلامة صارمة.'
+    }
+  }
+];
+
+const ITEMS = {
+  '1-4-1': [
+    { q: 'ملاقط الليزر هي:', opts: ['ملاقط معدنية دقيقة', 'تقنية تستخدم حزمة ليزر مركزة للإمساك بالجسيمات الدقيقة', 'مجهر إلكتروني', 'أداة جراحية تقليدية'], ans: 1, expl: 'ملاقط الليزر تقنية ضوئية تستخدم حزمة ليزر لإمساك الجسيمات الدقيقة دون لمس.', wrongMap: { "0": 'ليست معدنية.', "2": 'المجهر الإلكتروني أداة تصوير لا إمساك.', "3": 'ليست جراحية تقليدية.' } },
+    { q: 'تعتمد ملاقط الليزر على خاصية الفوتون:', opts: ['الكتلة', 'الزخم (كمية الحركة)', 'الشحنة الكهربائية', 'اللون'], ans: 1, expl: 'الفوتونات تحمل زخماً، وعند انحرافها تنقل زخماً للجسيم.', wrongMap: { "0": 'الفوتون ليس له كتلة سكون.', "2": 'الفوتون متعادل الشحنة.', "3": 'اللون خاصية للضوء المرئي لا محددة للزخم.' } },
+    { q: 'أي من التالي تطبيق لملاقط الليزر؟', opts: ['قياس درجة حرارة الشمس', 'عزل خلية مفردة من دم المريض', 'تسخين الماء', 'قياس ضغط الهواء'], ans: 1, expl: 'عزل الخلايا المفردة من أهم تطبيقات ملاقط الليزر في الطب الحيوي.', wrongMap: { "0": 'لا علاقة.', "2": 'الليزر يمكن أن يسخن لكن هذا ليس تطبيق ملاقط الليزر.', "3": 'لا علاقة.' } }
+  ],
+  '1-4-2': [
+    { q: 'لماذا لا تتلف ملاقط الليزر الخلية الحية؟', opts: ['لأنها تستخدم ليزراً عالي الطاقة', 'لأنها تستخدم ليزراً منخفض الطاقة دون تلامس ميكانيكي', 'لأنها تلمس الخلية بأطراف دقيقة', 'لأن الخلية لا تتأثر بالضوء'], ans: 1, expl: 'الليزر منخفض الطاقة لا يكسر الروابط، ولا يوجد تلامس ميكانيكي.', wrongMap: { "0": 'العالي قد يتلف.', "2": 'لا تلامس فيزيائي.', "3": 'الخلية تتأثر بالضوء عالي الطاقة.' } },
+    { q: 'كيف تمسك ملاقط الليزر الخلية؟', opts: ['بشفط الهواء', 'بالمغناطيسية', 'بقوى الفوتونات التي تدفع الخلية نحو مركز الحزمة', 'بالكهرباء الساكنة'], ans: 2, expl: 'قوى الفوتونات تدفع الخلية برفق نحو مركز حزمة الليزر.', wrongMap: { "0": 'لا شفط في ملاقط الليزر.', "1": 'ليست مغناطيسية.', "3": 'ليست كهرباء ساكنة.' } },
+    { q: 'أي إجراء يضمن سلامة الخلية عند عزلها بملاقط الليزر؟', opts: ['استخدام ليزر عالي الطاقة', 'التحكم في شدة الليزر واختيار التردد المنخفض', 'تسخين الخلية قبل العزل', 'تجميد الخلية'], ans: 1, expl: 'التحكم في شدة الليزر والتردد يضمن بقاء الخلية سليمة.', wrongMap: { "0": 'العالي قد يتلف.', "2": 'التسخين يضر.', "3": 'التجميد غير ضروري.' } }
+  ],
+  '1-4-3': [
+    { q: 'طاقة فوتون الليزر ترتبط بتردده عبر:', opts: ['<span class="ltr">E = mc²</span>', '<span class="ltr">E = hν</span>', '<span class="ltr">E = ½mv²</span>', '<span class="ltr">E = PV</span>'], ans: 1, expl: '<span class="ltr">E = hν</span> هي معادلة بلانك لطاقة الفوتون.', wrongMap: { "0": 'معادلة الكتلة-الطاقة.', "2": 'طاقة حركية.', "3": 'قانون الغازات.' } },
+    { q: 'للتشخيص الوراثي، يُفضل ليزر:', opts: ['عالي الطاقة لتدمير الخلية', 'منخفض الطاقة لعزل الخلية سليمة', 'أي طاقة عشوائية', 'لا يُستخدم الليزر'], ans: 1, expl: 'التشخيص يحتاج خلية سليمة، لذا الليزر منخفض الطاقة هو المناسب.', wrongMap: { "0": 'التدمير يفسد التشخيص.', "2": 'الطاقة العشوائية قد تتلف.', "3": 'الليزر مستخدم فعلاً.' } },
+    { q: 'كيف يساعد عزل خلية مفردة في التشخيص الوراثي؟', opts: ['يعطي صورة للخلية', 'يسمح باستخراج <span class="ltr">DNA</span> من خلية واحدة وتحليله دون تلوث', 'يقيس درجة حرارة الخلية', 'لا فائدة له'], ans: 1, expl: 'عزل خلية واحدة يتيح تحليل <span class="ltr">DNA</span> نقياً دون تلوث من خلايا أخرى.', wrongMap: { "0": 'التصوير ليس الغرض.', "2": 'الحرارة ليست الغرض.', "3": 'له فائدة كبيرة.' } }
+  ],
+  '1-4-4': [
+    { q: 'أي من التالي تطبيق علاجي لتقنية الليزر؟', opts: ['تصحيح الإبصار (<span class="ltr">LASIK</span>)', 'قياس الكتلة', 'تحلية المياه', 'صبغ الأقمشة'], ans: 0, expl: 'جراحة الليزر لتصحيح الإبصار (<span class="ltr">LASIK</span>) من أشهر التطبيقات.', wrongMap: { "1": 'الليزر لا يقيس الكتلة.', "2": 'الليزر ليس تقنية تحلية.', "3": 'صبغ الأقمشة تقنية كيميائية.' } },
+    { q: 'كيف يدعم الليزر الطبي رؤية 2030؟', opts: ['يزيد استهلاك الطاقة', 'يطور الرعاية الصحية والبحث الطبي والاقتصاد غير النفطي', 'يقلل الكوادر الطبية', 'يعزل المملكة عن التقنية'], ans: 1, expl: 'الليزر الطبي يدعم الصحة والبحث والاقتصاد — وهي محاور رؤية 2030.', wrongMap: { "0": 'الهدف تحسين الكفاءة.', "2": 'الهدف زيادة الكفاءات.', "3": 'الهدف توطين التقنية لا عزلها.' } },
+    { q: 'من التحديات التي تواجه استخدام الليزر في الطب:', opts: ['سهولة الاستخدام فقط', 'التكلفة العالية والحاجة لتدريب الكوادر ومعايير السلامة', 'عدم فعاليته', 'قلة التطبيقات'], ans: 1, expl: 'التحديات: التكلفة، التدريب، السلامة. الفاعلية عالية والتطبيقات كثيرة.', wrongMap: { "0": 'الاستخدام يحتاج تدريباً.', "2": 'فعاليته عالية.', "3": 'تطبيقاته كثيرة.' } }
+  ]
+};
+
+const Store = (() => {
+  let backend = null, db = null;
+  const mem = { student: [], progress: [], attempts: [], certificates: [] };
+  const DB_NAME = 'chem21-shared';
+  function tryIDB() {
+    return new Promise((resolve) => {
+      let req;
+      try { req = indexedDB.open(DB_NAME, 1); } catch (e) { resolve(false); return; }
+      req.onupgradeneeded = e => {
+        const d = e.target.result;
+        if (!d.objectStoreNames.contains('student')) d.createObjectStore('student', { keyPath: 'id' });
+        if (!d.objectStoreNames.contains('progress')) d.createObjectStore('progress', { keyPath: 'objectiveId' });
+        if (!d.objectStoreNames.contains('attempts')) d.createObjectStore('attempts', { keyPath: 'id', autoIncrement: true });
+        if (!d.objectStoreNames.contains('certificates')) d.createObjectStore('certificates', { keyPath: 'id' });
+      };
+      req.onsuccess = e => { db = e.target.result; resolve(true); };
+      req.onerror = () => resolve(false);
+      req.onblocked = () => resolve(false);
+    });
+  }
+  function tryLS() { try { localStorage.setItem('__ct__', '1'); localStorage.removeItem('__ct__'); return true; } catch (e) { return false; } }
+  function lsAll(s) { try { return JSON.parse(localStorage.getItem(DB_NAME + ':' + s) || '[]'); } catch (e) { return []; } }
+  function lsSave(s, a) { try { localStorage.setItem(DB_NAME + ':' + s, JSON.stringify(a)); } catch (e) {} }
+  return {
+    get backend() { return backend; },
+    open: async function() {
+      if (await tryIDB()) { backend = 'idb'; return; }
+      if (tryLS()) { backend = 'ls'; return; }
+      backend = 'mem';
+    },
+    getAll: async function(s) {
+      if (backend === 'idb') return new Promise((res, rej) => { const tx = db.transaction(s, 'readonly'); const r = tx.objectStore(s).getAll(); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+      if (backend === 'ls') return lsAll(s);
+      return mem[s].slice();
+    },
+    put: async function(s, v) {
+      if (backend === 'idb') return new Promise((res, rej) => { const tx = db.transaction(s, 'readwrite'); const r = tx.objectStore(s).put(v); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
+      const kf = s === 'progress' ? 'objectiveId' : 'id';
+      if (backend === 'ls') {
+        const a = lsAll(s);
+        if (s === 'attempts') { v.id = Date.now() + Math.random(); a.push(v); }
+        else { const i = a.findIndex(x => x[kf] === v[kf]); if (i >= 0) a[i] = v; else a.push(v); }
+        lsSave(s, a); return;
+      }
+      if (s === 'attempts') { v.id = Date.now() + Math.random(); mem[s].push(v); }
+      else { const i = mem[s].findIndex(x => x[kf] === v[kf]); if (i >= 0) mem[s][i] = v; else mem[s].push(v); }
+    },
+    clear: async function(s) {
+      if (backend === 'idb') return new Promise((res, rej) => { const tx = db.transaction(s, 'readwrite'); const r = tx.objectStore(s).clear(); r.onsuccess = () => res(); r.onerror = () => rej(r.error); });
+      if (backend === 'ls') { lsSave(s, []); return; }
+      mem[s] = [];
+    }
+  };
+})();
+
+function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function shuffle(arr) { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function todayHijri() { try { return new Date().toLocaleDateString('ar-SA-u-ca-islamic'); } catch (e) { return new Date().toLocaleDateString('ar-SA'); } }
+function todayGreg() { return new Date().toLocaleDateString('ar-SA-u-ca-gregory'); }
+function hashStr(s) { let h = 0; for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0; return Math.abs(h).toString(36).toUpperCase().slice(0, 8); }
+function certCode(type, subject) {
+  const seed = String(state.student.id) + type + subject + Date.now() + Math.random();
+  return 'K21-' + type + '-' + subject + '-' + hashStr(seed);
+}
+function isReflectionValid(text, objectiveId) {
+  const trimmed = text.trim();
+  if (trimmed.length < 20) return { ok: false, msg: 'يجب أن تكتب 20 حرفًا على الأقل.' };
+  const words = trimmed.split(/\s+/).filter(w => w.length > 0);
+  if (words.length < 3) return { ok: false, msg: 'يجب أن تكتب 3 كلمات على الأقل.' };
+  const chars = trimmed.replace(/\s+/g, '');
+  const counts = {}; let max = 0;
+  for (const c of chars) { counts[c] = (counts[c] || 0) + 1; if (counts[c] > max) max = counts[c]; }
+  if (max / chars.length > 0.5) return { ok: false, msg: 'اكتب شرحًا حقيقيًا (لا تكرر حرفًا واحدًا).' };
+  if (objectiveId && REFLECTION_KEYWORDS[objectiveId]) {
+    const kws = REFLECTION_KEYWORDS[objectiveId];
+    let found = false;
+    for (let i = 0; i < kws.length; i++) { if (trimmed.indexOf(kws[i]) !== -1) { found = true; break; } }
+    if (!found) return { ok: false, msg: 'اذكر مفهومًا واحدًا على الأقل من الدرس (مثل: ' + kws.slice(0, 3).join('، ') + ').' };
+  }
+  return { ok: true };
+}
+function storageWarning() {
+  if (Store.backend === 'mem') return '<div class="storage-warn">⚠️ التخزين غير متاح (file://). شغّل خادمًا محليًا.</div>';
+  if (Store.backend === 'ls') return '<div class="storage-warn">ℹ️ التخزين عبر localStorage (بديل).</div>';
+  return '';
+}
+
+async function getStudent() { const a = await Store.getAll('student'); return a[0] || null; }
+async function saveStudent(s) { await Store.put('student', s); }
+
+function prereqsSatisfied(objId, progress) {
+  const obj = OBJECTIVES.find(o => o.id === objId);
+  if (!obj) return false;
+  for (const p of obj.prereqs) {
+    if (EXTERNAL_PREREQS.indexOf(p) !== -1) continue;
+    const pr = progress.find(x => x.objectiveId === p);
+    if (!pr || pr.state !== 'MASTERED') return false;
+  }
+  return true;
+}
+
+async function initializeProgress() {
+  const existing = await Store.getAll('progress');
+  const existingForLesson = existing.filter(p => (p.lessonId === LESSON_ID) || (p.objectiveId && p.objectiveId.indexOf(LESSON_ID + '-') === 0));
+  if (existingForLesson.length === OBJECTIVES.length) return existing;
+  for (const o of OBJECTIVES) {
+    const existingObj = existing.find(x => x.objectiveId === o.id);
+    if (!existingObj) {
+      const r = {
+        objectiveId: o.id, lessonId: LESSON_ID, chapterId: CHAPTER_ID,
+        state: prereqsSatisfied(o.id, existing) ? 'AVAILABLE' : 'LOCKED',
+        masteryScore: 0, remediationRounds: 0, lastAttemptAt: null, masteredAt: null
+      };
+      await Store.put('progress', r);
+    }
+  }
+  return await Store.getAll('progress');
+}
+
+async function updateProgress(objId, patch) {
+  const p = state.progress.find(x => x.objectiveId === objId);
+  Object.assign(p, patch);
+  await Store.put('progress', p);
+}
+function getProgress(objId) { return state.progress.find(x => x.objectiveId === objId); }
+async function unlockDependents() {
+  for (const o of OBJECTIVES) {
+    const p = getProgress(o.id);
+    if (p.state === 'LOCKED' && prereqsSatisfied(o.id, state.progress)) {
+      p.state = 'AVAILABLE';
+      await Store.put('progress', p);
+    }
+  }
+}
+function totalMastered() { return OBJECTIVES.filter(o => getProgress(o.id).state === 'MASTERED').length; }
+
+let state = { student: null, progress: [], currentObjective: null };
+const view = document.getElementById('view');
+
+function resetView() {
+  view.innerHTML = '';
+  const warn = storageWarning();
+  if (warn) view.insertAdjacentHTML('beforeend', warn);
+}
+
+const GROUPS = [
+  { title: 'المجموعة الأولى: المفهوم والآلية', start: 0, end: 2 },
+  { title: 'المجموعة الثانية: التطبيقات والتقييم', start: 2, end: 4 }
+];
+
+function renderLessonHome() {
+  resetView();
+  const lessonProgress = state.progress.filter(p => (p.lessonId === LESSON_ID) || (p.objectiveId && p.objectiveId.indexOf(LESSON_ID + '-') === 0));
+  const mastered = lessonProgress.filter(p => p.state === 'MASTERED').length;
+  const total = OBJECTIVES.length;
+  const pct = total > 0 ? Math.round(mastered / total * 100) : 0;
+  view.insertAdjacentHTML('beforeend', `
+    <div class="breadcrumb">
+      <div><a href="index.html">🏠 الرئيسية</a> · <span>${LESSON_CODE} · الفصل الأول: الإلكترونات في الذرة</span></div>
+      <a href="index.html" class="btn outline" style="font-size:.8rem;padding:.3rem .6rem;">عودة للمنهج</a>
+    </div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.6rem">
+        <div><b>${LESSON_CODE} · ${LESSON_TITLE}</b></div>
+        <div class="muted">${mastered} / ${total} هدفًا متقنًا (<bdi>${pct}%</bdi>)</div>
+      </div>
+      <div class="progress-bar"><div style="width:${pct}%"></div></div>
+    </div>
+    <div id="obj-list"></div>
+    <div id="cert-area" style="margin-top:1.5rem"></div>`);
+  const list = document.getElementById('obj-list');
+  GROUPS.forEach(group => {
+    const groupTitle = document.createElement('div');
+    groupTitle.className = 'group-title';
+    groupTitle.textContent = group.title;
+    list.appendChild(groupTitle);
+    OBJECTIVES.slice(group.start, group.end).forEach(o => {
+      const p = getProgress(o.id);
+      if (!p) return;
+      const labels = { LOCKED: 'مقفل 🔒', AVAILABLE: 'متاح', MASTERED: 'متقن ✓', DIAGNOSTIC: 'قيد التعلّم', INSTRUCTION: 'قيد التعلّم', CHECK: 'قيد التعلّم', REMEDIATION: 'يحتاج معالجة', RECHECK: 'قيد التعلّم' };
+      const cls = p.state === 'LOCKED' ? 'locked' : (p.state === 'MASTERED' ? 'mastered' : '');
+      const row = document.createElement('button');
+      row.type = 'button';
+      row.className = 'objective-row ' + cls;
+      row.innerHTML = '<div class="obj-text"><div><span class="obj-id ltr">' + o.id + '</span> <span class="state-badge state-' + p.state + '">' + labels[p.state] + '</span></div><div style="margin-top:.35rem" dir="auto">' + o.text + '</div></div><div style="font-size:.85rem;color:var(--text-sec);white-space:nowrap">' + o.bloom + '</div>';
+      row.addEventListener('click', () => {
+        if (p.state === 'LOCKED') { alert('يتطلب إتقان الهدف السابق أولًا.'); return; }
+        state.currentObjective = o.id;
+        renderObjective();
+      });
+      list.appendChild(row);
+    });
+  });
+  const certArea = document.getElementById('cert-area');
+  if (mastered === total) {
+    certArea.innerHTML = '<button class="primary" id="btn-cert" style="width:100%">🎓 استخرج شهادة إتمام الدرس</button>';
+    document.getElementById('btn-cert').addEventListener('click', renderCertificate);
+  } else {
+    certArea.innerHTML = '<p class="muted" style="text-align:center">أكمل الأهداف الأربعة لاستخراج شهادة إتمام الدرس (' + mastered + '/' + total + ').</p>';
+  }
+}
+
+async function renderObjective() {
+  const obj = OBJECTIVES.find(o => o.id === state.currentObjective);
+  const p = getProgress(obj.id);
+  if (p.state === 'AVAILABLE') { await updateProgress(obj.id, { state: 'DIAGNOSTIC' }); runDiagnostic(obj); }
+  else if (p.state === 'DIAGNOSTIC') runDiagnostic(obj);
+  else if (p.state === 'INSTRUCTION') showInstruction(obj);
+  else if (p.state === 'CHECK') runCheck(obj, 'check');
+  else if (p.state === 'REMEDIATION') showRemediation(obj);
+  else if (p.state === 'RECHECK') runCheck(obj, 'recheck');
+  else if (p.state === 'MASTERED') showMastered(obj);
+  else renderLessonHome();
+}
+
+function buildFeedback(item, chosenIdx) {
+  if (chosenIdx === item.ans) {
+    return '<div class="feedback correct">✓ إجابة صحيحة<br>' + item.expl + '</div>';
+  }
+  let hint = (item.wrongMap && item.wrongMap[String(chosenIdx)]) ? item.wrongMap[String(chosenIdx)] : '';
+  let html = '<div class="feedback wrong">✗ إجابة خاطئة<br>الإجابة الصحيحة: <b>' + item.opts[item.ans] + '</b>';
+  if (hint) html += '<br><span style="color:var(--text-sec)">' + hint + '</span>';
+  else html += '<br>' + item.expl;
+  html += '</div>';
+  return html;
+}
+
+function runDiagnostic(obj) {
+  const pool = shuffle(ITEMS[obj.id]).slice(0, 2);
+  let idx = 0, answered = false;
+  const objHeader = '<h2 style="margin-top:0" dir="auto">' + obj.text + '</h2><p class="muted">المرحلة: تشخيص سريع (' + pool.length + ' أسئلة — لا تُحتسب)</p>';
+  function showQ() {
+    answered = false;
+    if (idx >= pool.length) { updateProgress(obj.id, { state: 'INSTRUCTION' }).then(() => showInstruction(obj)); return; }
+    resetView();
+    const item = pool[idx];
+    view.insertAdjacentHTML('beforeend', '<div class="card">' + objHeader + '<div class="muted" style="margin-bottom:.5rem">السؤال ' + (idx + 1) + ' من ' + pool.length + '</div><div class="question" dir="auto">' + item.q + '</div><div class="options" id="opts"></div><button type="button" class="skip-btn" id="skip-btn">لا أعرف — أرني الإجابة</button><div id="fb" aria-live="polite"></div><div class="next-btn-wrap" id="next-wrap" style="display:none"><button type="button" class="primary" id="next-btn">التالي →</button></div><div class="row"><button class="outline" id="back-btn">← العودة للقائمة</button></div></div>');
+    document.getElementById('back-btn').addEventListener('click', renderLessonHome);
+    const optsBox = document.getElementById('opts');
+    item.opts.forEach((o, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'option';
+      b.setAttribute('dir', 'auto');
+      b.innerHTML = o;
+      b.addEventListener('click', function() {
+        if (answered) return;
+        answered = true;
+        const allOpts = optsBox.querySelectorAll('.option');
+        for (let k = 0; k < allOpts.length; k++) allOpts[k].disabled = true;
+        document.getElementById('skip-btn').disabled = true;
+        b.classList.add(i === item.ans ? 'correct' : 'wrong');
+        allOpts[item.ans].classList.add('correct');
+        document.getElementById('fb').innerHTML = buildFeedback(item, i);
+        const wrap = document.getElementById('next-wrap');
+        wrap.style.display = 'flex';
+        const nb = document.getElementById('next-btn');
+        nb.focus();
+        nb.addEventListener('click', function() { idx++; showQ(); });
+      });
+      optsBox.appendChild(b);
+    });
+    document.getElementById('skip-btn').addEventListener('click', function() {
+      if (answered) return;
+      answered = true;
+      const allOpts = optsBox.querySelectorAll('.option');
+      for (let k = 0; k < allOpts.length; k++) allOpts[k].disabled = true;
+      document.getElementById('skip-btn').disabled = true;
+      allOpts[item.ans].classList.add('correct');
+      document.getElementById('fb').innerHTML = '<div class="feedback neutral">الإجابة الصحيحة: <b>' + item.opts[item.ans] + '</b><br>' + item.expl + '</div>';
+      const wrap = document.getElementById('next-wrap');
+      wrap.style.display = 'flex';
+      const nb = document.getElementById('next-btn');
+      nb.focus();
+      nb.addEventListener('click', function() { idx++; showQ(); });
+    });
+  }
+  showQ();
+}
+
+function showInstruction(obj) {
+  resetView();
+  view.insertAdjacentHTML('beforeend', '<div class="card"><div class="breadcrumb"><button class="outline" id="back-btn">← العودة للقائمة</button></div><h2 style="margin-top:0" dir="auto">' + obj.text + '</h2><p class="muted">المرحلة: تعليم · المستوى البلومي: ' + obj.bloom + '</p><div class="prose" dir="auto">' + obj.instruction.explanation + '</div><hr style="border:none;border-top:1px solid var(--border);margin:1.5rem 0"><h3>سؤال تأملي (إلزامي)</h3><p class="muted" dir="auto">' + obj.instruction.prompt + '</p><textarea id="reflection" class="textarea" placeholder="اكتب شرحك هنا (3 كلمات على الأقل، 20 حرفًا، مع ذكر مفهوم من الدرس)..."></textarea><p class="muted" id="refl-status" aria-live="polite">لم تكتب بعد.</p><div class="row"><button id="btn-check" class="primary" disabled>أفهم، اختبرني</button><button class="outline" id="back-btn-2">← العودة للقائمة</button></div></div>');
+  document.getElementById('back-btn').addEventListener('click', renderLessonHome);
+  document.getElementById('back-btn-2').addEventListener('click', renderLessonHome);
+  const ta = document.getElementById('reflection');
+  const btn = document.getElementById('btn-check');
+  const status = document.getElementById('refl-status');
+  ta.addEventListener('input', function() {
+    const v = isReflectionValid(ta.value, obj.id);
+    btn.disabled = !v.ok;
+    status.textContent = v.ok ? '✓ جاهز' : (v.msg || '');
+  });
+  btn.addEventListener('click', async function() {
+    await Store.put('attempts', { objectiveId: obj.id, itemId: 'reflection', response: ta.value, correct: true, type: 'self_explanation', createdAt: Date.now() });
+    await updateProgress(obj.id, { state: 'CHECK' });
+    runCheck(obj, 'check');
+  });
+}
+
+function runCheck(obj, mode) {
+  const pool = shuffle(ITEMS[obj.id]);
+  let idx = 0, correct = 0, answered = false;
+  const objHeader = '<h2 style="margin-top:0" dir="auto">' + obj.text + '</h2><p class="muted">المرحلة: ' + (mode === 'check' ? 'تحقق' : 'إعادة تحقق') + ' · ' + pool.length + ' أسئلة · عتبة الإتقان <bdi>' + Math.round(THRESHOLD*100) + '%</bdi></p>';
+  async function showQ() {
+    answered = false;
+    if (idx >= pool.length) {
+      const score = correct / pool.length;
+      const p = getProgress(obj.id);
+      const rounds = p.remediationRounds || 0;
+      if (score >= THRESHOLD) {
+        await updateProgress(obj.id, { state: 'MASTERED', masteryScore: score, masteredAt: Date.now() });
+        await unlockDependents();
+        showMastered(obj);
+      } else {
+        const newRounds = mode === 'recheck' ? rounds + 1 : rounds;
+        if (newRounds >= 3) {
+          await updateProgress(obj.id, { state: 'REMEDIATION', masteryScore: score, remediationRounds: newRounds });
+          showStuck(obj);
+        } else {
+          await updateProgress(obj.id, { state: 'REMEDIATION', masteryScore: score, remediationRounds: newRounds });
+          showRemediation(obj);
+        }
+      }
+      return;
+    }
+    resetView();
+    const item = pool[idx];
+    view.insertAdjacentHTML('beforeend', '<div class="card"><div class="breadcrumb"><button class="outline" id="back-btn">← العودة للقائمة</button></div>' + objHeader + '<div class="muted" style="margin-bottom:.5rem">السؤال ' + (idx + 1) + ' من ' + pool.length + '</div><div class="question" dir="auto">' + item.q + '</div><div class="options" id="opts"></div><div id="fb" aria-live="polite"></div><div class="next-btn-wrap" id="next-wrap" style="display:none"><button type="button" class="primary" id="next-btn">التالي →</button></div></div>');
+    document.getElementById('back-btn').addEventListener('click', function() {
+      if (confirm('هل تريد الخروج من الاختبار والعودة للقائمة؟')) renderLessonHome();
+    });
+    const optsBox = document.getElementById('opts');
+    item.opts.forEach((o, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'option';
+      b.setAttribute('dir', 'auto');
+      b.innerHTML = o;
+      b.addEventListener('click', async function() {
+        if (answered) return;
+        answered = true;
+        const allOpts = optsBox.querySelectorAll('.option');
+        for (let k = 0; k < allOpts.length; k++) allOpts[k].disabled = true;
+        b.classList.add(i === item.ans ? 'correct' : 'wrong');
+        allOpts[item.ans].classList.add('correct');
+        if (i === item.ans) correct++;
+        await Store.put('attempts', { objectiveId: obj.id, itemId: item.q.slice(0, 40), response: o, correct: i === item.ans, type: mode, createdAt: Date.now() });
+        document.getElementById('fb').innerHTML = buildFeedback(item, i);
+        const wrap = document.getElementById('next-wrap');
+        wrap.style.display = 'flex';
+        const nb = document.getElementById('next-btn');
+        nb.focus();
+        nb.addEventListener('click', async function() { idx++; await showQ(); });
+      });
+      optsBox.appendChild(b);
+    });
+  }
+  showQ();
+}
+
+function showRemediation(obj) {
+  resetView();
+  view.insertAdjacentHTML('beforeend', '<div class="card"><div class="breadcrumb"><button class="outline" id="back-btn">← العودة للقائمة</button></div><h2 style="margin-top:0" dir="auto">' + obj.text + '</h2><p class="muted">المرحلة: معالجة — محتوى بديل لتقوية الفهم</p><div class="prose" dir="auto"><h3>تشبيه</h3><p>' + obj.remediation.analogy + '</p><h3>شرح بديل</h3>' + obj.remediation.explanation + '</div><div class="row" style="margin-top:1.5rem"><button id="btn-recheck" class="primary">أعد الاختبار</button><button class="outline" id="back-btn-2">← العودة للقائمة</button></div></div>');
+  document.getElementById('back-btn').addEventListener('click', renderLessonHome);
+  document.getElementById('back-btn-2').addEventListener('click', renderLessonHome);
+  document.getElementById('btn-recheck').addEventListener('click', async function() {
+    await updateProgress(obj.id, { state: 'RECHECK' });
+    runCheck(obj, 'recheck');
+  });
+}
+
+function showStuck(obj) {
+  resetView();
+  view.insertAdjacentHTML('beforeend', '<div class="card"><h2 style="margin-top:0">هذا الهدف يحتاج مراجعة إضافية</h2><p>حاولت ثلاث مرات. لا بأس — هذا طبيعي. يمكنك:</p><ul><li>مراجعة الشرح الأول للهدف.</li><li>تجربة المعالجة مرة أخرى بمحتوى مختلف.</li><li>المحاولة لاحقًا أو مشاركة تقريرك مع معلمك.</li></ul><div class="row"><button id="btn-instruction" class="primary">راجع الشرح الأول</button><button id="btn-retry" class="outline">جرب المعالجة مرة أخرى</button><button class="outline" id="back-btn">← العودة للقائمة</button></div></div>');
+  document.getElementById('back-btn').addEventListener('click', renderLessonHome);
+  document.getElementById('btn-instruction').addEventListener('click', async function() {
+    await updateProgress(obj.id, { state: 'INSTRUCTION' });
+    showInstruction(obj);
+  });
+  document.getElementById('btn-retry').addEventListener('click', function() { showRemediation(obj); });
+}
+
+function showMastered(obj) {
+  resetView();
+  const done = totalMastered();
+  const total = OBJECTIVES.length;
+  const lessonDone = done === total;
+  let primaryBtn = '';
+  if (lessonDone) {
+    primaryBtn = '<button id="btn-cert" class="primary">🎓 استخرج شهادة إتمام الدرس</button>';
+  } else {
+    primaryBtn = '<button id="btn-list" class="primary">العودة إلى أهداف الدرس</button>';
+  }
+  view.insertAdjacentHTML('beforeend', '<div class="card" style="text-align:center"><h2 style="margin-top:0;color:var(--positive)">🎉 أتقنت هذا الهدف!</h2><p dir="auto">' + obj.text + '</p><div class="progress-bar" style="margin:1.5rem 0"><div style="width:' + Math.round(done/total*100) + '%"></div></div><p class="muted">' + done + ' / ' + total + ' هدفًا متقنًا في هذا الدرس</p><div class="row" style="justify-content:center">' + primaryBtn + '<a href="index.html" class="btn outline">🏠 خريطة المنهج</a></div></div>');
+  if (lessonDone) {
+    document.getElementById('btn-cert').addEventListener('click', renderCertificate);
+  } else {
+    document.getElementById('btn-list').addEventListener('click', function() { renderLessonHome(); });
+  }
+}
+
+async function renderCertificate() {
+  resetView();
+  const existing = await Store.getAll('certificates');
+  let cert = null;
+  for (const c of existing) {
+    if (c.type === 'lesson' && c.lessonId === LESSON_ID && c.studentName === state.student.name) { cert = c; break; }
+  }
+  if (!cert) {
+    const code = certCode('L1-4', LESSON_ID);
+    cert = { id: code, type: 'lesson', lessonId: LESSON_ID, lessonCode: LESSON_CODE, studentName: state.student.name, issuedAt: Date.now() };
+    await Store.put('certificates', cert);
+  }
+  view.insertAdjacentHTML('beforeend', '<div class="certificate"><h2>شهادة إتمام درس</h2><div class="course">منصة قطابري لإتقان كيمياء 2-1</div><div style="margin-top:2rem">تشهد المنصة بأن الطالب</div><div class="name" dir="auto">' + escapeHtml(state.student.name) + '</div><div style="font-size:1.1rem">قد أتمّ بنجاح درس</div><div style="font-size:1.3rem;font-weight:600;margin:.5rem 0">' + LESSON_TITLE + ' (<span class="ltr">' + LESSON_CODE + '</span>)</div><div class="course">بتاريخ: ' + todayHijri() + ' هـ — ' + todayGreg() + ' م</div><div class="code">رقم التحقق: <span class="ltr">' + cert.id + '</span></div><div class="sig">المعلم محمد قطابري راجحي<br><span class="muted" style="font-weight:400;font-size:.85rem">مجمع العز التعليمي</span></div><div class="muted" style="margin-top:1.5rem;font-size:.8rem">هذه الشهادة صادرة من المنصة بناءً على تقدم الطالب المحفوظ على جهازه، وليست شهادة معتمدة رسميًا.</div></div><div class="row no-print" style="justify-content:center"><button id="btn-print" class="primary">🖨️ طباعة / حفظ PDF</button><a href="index.html" class="btn outline">🏠 الرئيسية</a></div>');
+  document.getElementById('btn-print').addEventListener('click', function() { window.print(); });
+}
+
+(async function() {
+  try {
+    await Store.open();
+    state.student = await getStudent();
+    if (!state.student) { renderNamePrompt(); return; }
+    await continueBoot();
+  } catch (e) {
+    view.innerHTML = '<div class="card"><h2>خطأ</h2><p>' + escapeHtml(e.message || String(e)) + '</p><a href="index.html" class="btn">🏠 الرئيسية</a></div>';
+  }
+})();
+
+function renderNamePrompt() {
+  resetView();
+  view.insertAdjacentHTML('beforeend', '<div class="card"><h2 style="margin-top:0">قبل أن تبدأ</h2><p>لم نجد اسمك في هذا المتصفح. اكتب اسمك:</p><input id="lesson-name" type="text" maxlength="50" placeholder="اسمك" style="width:100%;padding:.8rem;border:1px solid var(--border);border-radius:var(--radius);font-family:inherit;font-size:1rem;margin-bottom:1rem"><button id="lesson-start" class="primary" style="width:100%">ابدأ</button><div class="row" style="margin-top:1rem"><a href="index.html" class="btn outline">🏠 الصفحة الرئيسية</a></div></div>');
+  document.getElementById('lesson-start').addEventListener('click', async function() {
+    const name = document.getElementById('lesson-name').value.trim();
+    if (name.length < 2) { alert('اكتب اسمًا لا يقل عن حرفين'); return; }
+    state.student = { id: 'stu-' + Date.now(), name: name, createdAt: Date.now() };
+    await saveStudent(state.student);
+    await continueBoot();
+  });
+}
+
+async function continueBoot() {
+  await initializeProgress();
+  state.progress = await Store.getAll('progress');
+  renderLessonHome();
+}
+</script>
+</body>
+</html>
